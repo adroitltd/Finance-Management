@@ -1,0 +1,32 @@
+{
+  "id": "0df44509-948f-4439-b296-b7305cb00d4e",
+  "name": "Finance Management",
+  "publisher": "Adroit Solutions Limited",
+  "version": "24.0.0.0",
+  "brief": "UCA Finance Management",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "24.0.0.0",
+  "idRanges": [
+    {
+      "from": 60100,
+      "to": 60149
+    }
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": false,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+  },
+  "runtime": "13.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
