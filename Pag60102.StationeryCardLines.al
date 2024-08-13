@@ -87,36 +87,6 @@ page 60102 "Stationery Card Lines"
                         CurrPage.Update();
                     end;
                 }
-                field("Item Reference No."; Rec."Item Reference No.")
-                {
-                    AccessByPermission = tabledata "Item Reference" = R;
-                    ApplicationArea = Suite, ItemReferences;
-                    QuickEntry = false;
-                    ToolTip = 'Specifies a reference to the item number as defined by the vendor or customer, or the item''s barcode.';
-                    Visible = ItemReferenceVisible;
-
-                    trigger OnLookup(var Text: Text): Boolean
-                    var
-                        SalesHeader: Record "Sales Header";
-                        ItemReferenceMgt: Codeunit "Item Reference Management";
-                    begin
-                        SalesHeader.Get(Rec."Document Type", Rec."Document No.");
-                        ItemReferenceMgt.SalesReferenceNoLookup(Rec, SalesHeader);
-                        NoOnAfterValidate();
-                        UpdateEditableOnRow();
-                        DeltaUpdateTotals();
-                        OnReferenceNoOnAfterLookup(Rec);
-                        CurrPage.Update();
-                    end;
-
-                    trigger OnValidate()
-                    begin
-                        NoOnAfterValidate();
-                        UpdateEditableOnRow();
-                        DeltaUpdateTotals();
-                        CurrPage.Update();
-                    end;
-                }
                 field("Gen. Bus. Posting Group"; Rec."Gen. Bus. Posting Group")
                 {
                     ApplicationArea = Basic, Suite;
@@ -189,31 +159,6 @@ page 60102 "Stationery Card Lines"
                         Rec.SaveLookupSelection(Selected);
                     end;
                 }
-                field("Description 2"; Rec."Description 2")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Importance = Additional;
-                    ToolTip = 'Specifies information in addition to the description.';
-                    Visible = false;
-                }
-                field("Drop Shipment"; Rec."Drop Shipment")
-                {
-                    ApplicationArea = Suite;
-                    ToolTip = 'Specifies if your vendor ships the items directly to your customer.';
-                    Visible = false;
-                }
-                field("Special Order"; Rec."Special Order")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies that the item on the sales line is a special-order item.';
-                    Visible = false;
-                }
-                field("Return Reason Code"; Rec."Return Reason Code")
-                {
-                    ApplicationArea = Suite;
-                    ToolTip = 'Specifies the code explaining why the item was returned.';
-                    Visible = false;
-                }
                 field("Location Code"; Rec."Location Code")
                 {
                     ApplicationArea = Location;
@@ -227,23 +172,6 @@ page 60102 "Stationery Card Lines"
                     begin
                         LocationCodeOnAfterValidate();
                         DeltaUpdateTotals();
-                    end;
-                }
-                field("Bin Code"; Rec."Bin Code")
-                {
-                    ApplicationArea = Warehouse;
-                    ToolTip = 'Specifies the bin where the items are picked or put away.';
-                    Visible = false;
-                }
-                field(Control50; Rec.Reserve)
-                {
-                    ApplicationArea = Reservation;
-                    ToolTip = 'Specifies whether a reservation can be made for items on this line.';
-                    Visible = false;
-
-                    trigger OnValidate()
-                    begin
-                        ReserveOnAfterValidate();
                     end;
                 }
                 field(Quantity; Rec.Quantity)
@@ -292,14 +220,6 @@ page 60102 "Stationery Card Lines"
                     ToolTip = 'Specifies the unit cost of the item on the line.';
                     Visible = false;
                 }
-                field(SalesPriceExist; Rec.PriceExists())
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Sales Price Exists';
-                    Editable = false;
-                    ToolTip = 'Specifies that there is a specific price for this customer.';
-                    Visible = false;
-                }
                 field("Unit Price"; Rec."Unit Price")
                 {
                     ApplicationArea = Basic, Suite;
@@ -308,36 +228,6 @@ page 60102 "Stationery Card Lines"
                     Enabled = not IsBlankNumber;
                     ShowMandatory = (Rec.Type <> Rec.Type::" ") and (Rec."No." <> '');
                     ToolTip = 'Specifies the price for one unit on the sales line.';
-
-                    trigger OnValidate()
-                    begin
-                        DeltaUpdateTotals();
-                    end;
-                }
-                field("Tax Liable"; Rec."Tax Liable")
-                {
-                    ApplicationArea = SalesTax;
-                    Editable = false;
-                    ToolTip = 'Specifies if the customer or vendor is liable for sales tax.';
-                    Visible = false;
-                }
-                field("Tax Area Code"; Rec."Tax Area Code")
-                {
-                    ApplicationArea = SalesTax;
-                    ToolTip = 'Specifies the tax area that is used to calculate and post sales tax.';
-
-                    trigger OnValidate()
-                    begin
-                        DeltaUpdateTotals();
-                    end;
-                }
-                field("Tax Group Code"; Rec."Tax Group Code")
-                {
-                    ApplicationArea = SalesTax;
-                    Editable = not IsCommentLine;
-                    Enabled = not IsCommentLine;
-                    ShowMandatory = Rec."Tax Area Code" <> '';
-                    ToolTip = 'Specifies the tax group that is used to calculate and post sales tax.';
 
                     trigger OnValidate()
                     begin
@@ -370,74 +260,6 @@ page 60102 "Stationery Card Lines"
                     begin
                         DeltaUpdateTotals();
                     end;
-                }
-                field(SalesLineDiscExists; Rec.LineDiscExists())
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Sales Line Disc. Exists';
-                    Editable = false;
-                    ToolTip = 'Specifies that there is a specific discount for this customer.';
-                    Visible = false;
-                }
-                field("Line Discount Amount"; Rec."Line Discount Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the discount amount that is granted for the item on the line.';
-                    Visible = false;
-
-                    trigger OnValidate()
-                    begin
-                        DeltaUpdateTotals();
-                    end;
-                }
-                field("Prepayment %"; Rec."Prepayment %")
-                {
-                    ApplicationArea = Prepayments;
-                    ToolTip = 'Specifies the prepayment percentage to use to calculate the prepayment for sales.';
-                    Visible = false;
-                }
-                field("Prepmt. Line Amount"; Rec."Prepmt. Line Amount")
-                {
-                    ApplicationArea = Prepayments;
-                    ToolTip = 'Specifies the prepayment amount of the line in the currency of the sales document if a prepayment percentage is specified for the sales line.';
-                    Visible = false;
-                }
-                field("Prepmt. Amt. Inv."; Rec."Prepmt. Amt. Inv.")
-                {
-                    ApplicationArea = Prepayments;
-                    ToolTip = 'Specifies the prepayment amount that has already been invoiced to the customer for this sales line.';
-                    Visible = false;
-                }
-                field("Allow Invoice Disc."; Rec."Allow Invoice Disc.")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies if the invoice line is included when the invoice discount is calculated.';
-                    Visible = false;
-
-                    trigger OnValidate()
-                    begin
-                        CurrPage.SaveRecord();
-                        AmountWithDiscountAllowed := DocumentTotals.CalcTotalSalesAmountOnlyDiscountAllowed(Rec);
-                        InvoiceDiscountAmount := Round(AmountWithDiscountAllowed * InvoiceDiscountPct / 100, Currency."Amount Rounding Precision");
-                        ValidateInvoiceDiscountAmount();
-                    end;
-                }
-                field("Inv. Discount Amount"; Rec."Inv. Discount Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the total calculated invoice discount amount for the line.';
-                    Visible = false;
-
-                    trigger OnValidate()
-                    begin
-                        DeltaUpdateTotals();
-                    end;
-                }
-                field("Inv. Disc. Amount to Invoice"; Rec."Inv. Disc. Amount to Invoice")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the actual invoice discount amount that will be posted for the line in next invoice.';
-                    Visible = false;
                 }
                 field("Qty. to Ship"; Rec."Qty. to Ship")
                 {
@@ -506,62 +328,6 @@ page 60102 "Stationery Card Lines"
                         Page.RunModal(0, SalesInvoiceLine);
                     end;
                 }
-                field("Qty. to Assign"; Rec."Qty. to Assign")
-                {
-                    ApplicationArea = ItemCharges;
-                    QuickEntry = false;
-                    StyleExpr = ItemChargeStyleExpression;
-                    ToolTip = 'Specifies how many units of the item charge are assigned to the line originally.';
-                    Visible=false;
-
-                    trigger OnDrillDown()
-                    begin
-                        CurrPage.SaveRecord();
-                        Rec.ShowItemChargeAssgnt();
-                        UpdateForm(false);
-                    end;
-                }
-                field("Item Charge Qty. to Handle"; Rec."Item Charge Qty. to Handle")
-                {
-                    ApplicationArea = ItemCharges;
-                    QuickEntry = false;
-                    StyleExpr = ItemChargeToHandleStyleExpression;
-                    ToolTip = 'Specifies how many items the item charge will be assigned to on the line. It can be either equal to Qty. to Assign or to zero. If it is zero, the item charge will not be assigned to the line.';
-                    Visible=false;
-
-                    trigger OnDrillDown()
-                    begin
-                        CurrPage.SaveRecord();
-                        Rec.ShowItemChargeAssgnt();
-                        UpdateForm(false);
-                    end;
-                }
-                field("Qty. Assigned"; Rec."Qty. Assigned")
-                {
-                    ApplicationArea = ItemCharges;
-                    BlankZero = true;
-                    QuickEntry = false;
-                    ToolTip = 'Specifies the quantity of the item charge that was assigned to a specified item when you posted this sales line.';
-                    Visible=false;
-
-                    trigger OnDrillDown()
-                    begin
-                        CurrPage.SaveRecord();
-                        Rec.ShowItemChargeAssgnt();
-                        CurrPage.Update(false);
-                    end;
-                }
-                field("Requested Delivery Date"; Rec."Requested Delivery Date")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the date that the customer has asked for the order to be delivered.';
-                    Visible = false;
-
-                    trigger OnValidate()
-                    begin
-                        UpdateForm(true);
-                    end;
-                }
                 field("Promised Delivery Date"; Rec."Promised Delivery Date")
                 {
                     ApplicationArea = OrderPromising;
@@ -603,129 +369,6 @@ page 60102 "Stationery Card Lines"
                     trigger OnValidate()
                     begin
                         ShipmentDateOnAfterValidate();
-                    end;
-                }
-                field("Shipping Agent Code"; Rec."Shipping Agent Code")
-                {
-                    ApplicationArea = Suite;
-                    ToolTip = 'Specifies the code for the shipping agent who is transporting the items.';
-                    Visible = false;
-                }
-                field("Shipping Agent Service Code"; Rec."Shipping Agent Service Code")
-                {
-                    ApplicationArea = Suite;
-                    ToolTip = 'Specifies the code for the service, such as a one-day delivery, that is offered by the shipping agent.';
-                    Visible = false;
-                }
-                field("Shipping Time"; Rec."Shipping Time")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies how long it takes from when the items are shipped from the warehouse to when they are delivered.';
-                    Visible = false;
-                }
-                field("Work Type Code"; Rec."Work Type Code")
-                {
-                    ApplicationArea = Jobs;
-                    ToolTip = 'Specifies which work type the resource applies to when the sale is related to a project.';
-                    Visible = false;
-                }
-                field("Whse. Outstanding Qty."; Rec."Whse. Outstanding Qty.")
-                {
-                    ApplicationArea = Warehouse;
-                    ToolTip = 'Specifies how many units on the sales order line remain to be handled in warehouse documents.';
-                    Visible = false;
-                }
-                field("Whse. Outstanding Qty. (Base)"; Rec."Whse. Outstanding Qty. (Base)")
-                {
-                    ApplicationArea = Warehouse;
-                    ToolTip = 'Specifies how many units on the sales order line remain to be handled in warehouse documents.';
-                    Visible = false;
-                }
-                field("ATO Whse. Outstanding Qty."; Rec."ATO Whse. Outstanding Qty.")
-                {
-                    ApplicationArea = Warehouse;
-                    ToolTip = 'Specifies how many assemble-to-order units on the sales order line need to be assembled and handled in warehouse documents.';
-                    Visible = false;
-                }
-                field("ATO Whse. Outstd. Qty. (Base)"; Rec."ATO Whse. Outstd. Qty. (Base)")
-                {
-                    ApplicationArea = Warehouse;
-                    ToolTip = 'Specifies how many assemble-to-order units on the sales order line remain to be assembled and handled in warehouse documents.';
-                    Visible = false;
-                }
-                field("Outbound Whse. Handling Time"; Rec."Outbound Whse. Handling Time")
-                {
-                    ApplicationArea = Warehouse;
-                    ToolTip = 'Specifies a date formula for the time it takes to get items ready to ship from this location. The time element is used in the calculation of the delivery date as follows: Shipment Date + Outbound Warehouse Handling Time = Planned Shipment Date + Shipping Time = Planned Delivery Date.';
-                    Visible = false;
-                }
-                field("Blanket Order No."; Rec."Blanket Order No.")
-                {
-                    ApplicationArea = Suite;
-                    ToolTip = 'Specifies the number of the blanket order that the record originates from.';
-                    Visible = false;
-                }
-                field("Blanket Order Line No."; Rec."Blanket Order Line No.")
-                {
-                    ApplicationArea = Suite;
-                    ToolTip = 'Specifies the number of the blanket order line that the record originates from.';
-                    Visible = false;
-                }
-                field("FA Posting Date"; Rec."FA Posting Date")
-                {
-                    ApplicationArea = FixedAssets;
-                    ToolTip = 'Specifies the date that will be used on related fixed asset ledger entries.';
-                    Visible = false;
-                }
-                field("Depr. until FA Posting Date"; Rec."Depr. until FA Posting Date")
-                {
-                    ApplicationArea = FixedAssets;
-                    ToolTip = 'Specifies if depreciation was calculated until the FA posting date of the line.';
-                    Visible = false;
-                }
-                field("Depreciation Book Code"; Rec."Depreciation Book Code")
-                {
-                    ApplicationArea = FixedAssets;
-                    ToolTip = 'Specifies the code for the depreciation book to which the line will be posted if you have selected Fixed Asset in the Type field for this line.';
-                    Visible = false;
-                }
-                field("Use Duplication List"; Rec."Use Duplication List")
-                {
-                    ApplicationArea = FixedAssets;
-                    ToolTip = 'Specifies, if the type is Fixed Asset, that information on the line is to be posted to all the assets defined depreciation books. ';
-                    Visible = false;
-                }
-                field("Duplicate in Depreciation Book"; Rec."Duplicate in Depreciation Book")
-                {
-                    ApplicationArea = FixedAssets;
-                    ToolTip = 'Specifies a depreciation book code if you want the journal line to be posted to that depreciation book, as well as to the depreciation book in the Depreciation Book Code field.';
-                    Visible = false;
-                }
-                field("Appl.-from Item Entry"; Rec."Appl.-from Item Entry")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the number of the item ledger entry that the document or journal line is applied from.';
-                    Visible = false;
-                }
-                field("Appl.-to Item Entry"; Rec."Appl.-to Item Entry")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the number of the item ledger entry that the document or journal line is applied -to.';
-                    Visible = false;
-                }
-                field("Deferral Code"; Rec."Deferral Code")
-                {
-                    ApplicationArea = Suite;
-                    Enabled = (Rec.Type <> Rec.Type::"Fixed Asset") and (Rec.Type <> Rec.Type::" ");
-                    TableRelation = "Deferral Template"."Deferral Code";
-                    ToolTip = 'Specifies the deferral template that governs how revenue earned with this sales document is deferred to the different accounting periods when the good or service was delivered.';
-                    Visible = false;
-
-                    trigger OnAssistEdit()
-                    begin
-                        CurrPage.SaveRecord();
-                        Commit();
-                        Rec.ShowDeferralSchedule();
                     end;
                 }
                 field("Shortcut Dimension 1 Code"; Rec."Shortcut Dimension 1 Code")
@@ -838,38 +481,6 @@ page 60102 "Stationery Card Lines"
                     ToolTip = 'Specifies the line number.';
                     Visible = false;
                 }
-                field("Gross Weight"; Rec."Gross Weight")
-                {
-                    Caption = 'Unit Gross Weight';
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the gross weight of one unit of the item. In the sales statistics window, the gross weight on the line is included in the total gross weight of all the lines for the particular sales document.';
-                    Visible = false;
-                }
-                field("Net Weight"; Rec."Net Weight")
-                {
-                    Caption = 'Unit Net Weight';
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the net weight of one unit of the item. In the sales statistics window, the net weight on the line is included in the total net weight of all the lines for the particular sales document.';
-                    Visible = false;
-                }
-                field("Unit Volume"; Rec."Unit Volume")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the volume of one unit of the item. In the sales statistics window, the volume of one unit of the item on the line is included in the total volume of all the lines for the particular sales document.';
-                    Visible = false;
-                }
-                field("Units per Parcel"; Rec."Units per Parcel")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the number of units per parcel of the item. In the sales statistics window, the number of units per parcel on the line helps to determine the total number of units for all the lines for the particular sales document.';
-                    Visible = false;
-                }
-                field("Attached to Line No."; Rec."Attached to Line No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ToolTip = 'Specifies the line number to which this sales line is attached.';
-                    Visible = false;
-                }
                 field("Attached Lines Count"; Rec."Attached Lines Count")
                 {
                     ApplicationArea = Basic, Suite;
@@ -883,9 +494,7 @@ page 60102 "Stationery Card Lines"
                 group(Control45)
                 {
                     ShowCaption = false;
-#pragma warning disable AA0100
                     field("TotalSalesLine.""Line Amount"""; TotalSalesLine."Line Amount")
-#pragma warning restore AA0100
                     {
                         ApplicationArea = Basic, Suite;
                         AutoFormatExpression = Currency.Code;
@@ -1011,7 +620,7 @@ page 60102 "Stationery Card Lines"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Period';
                         Image = Period;
-                        ToolTip = 'Show the projected quantity of the item over time according to time periods, such as day, week, or month.';
+                        ToolTip = 'Show the projected quantity of Stationery over time according to time periods, such as day, week, or month.';
 
                         trigger OnAction()
                         begin
@@ -1036,7 +645,7 @@ page 60102 "Stationery Card Lines"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Unit of Measure';
                         Image = UnitOfMeasure;
-                        ToolTip = 'View the item''s availability by a unit of measure.';
+                        ToolTip = 'View the Stationery''s availability by a unit of measure.';
 
                         trigger OnAction()
                         begin
@@ -1205,10 +814,7 @@ page 60102 "Stationery Card Lines"
 
     trigger OnFindRecord(Which: Text): Boolean
     begin
-        Rec.AddLoadFields(
-            "Price Calculation Method", "Sell-to Customer No.", "Customer Disc. Group", "Customer Price Group",
-            "VAT %", "VAT Calculation Type", "VAT Bus. Posting Group", "VAT Prod. Posting Group",
-            "Dimension Set ID", "Currency Code", "Qty. per Unit of Measure", "Allow Line Disc.");
+        Rec.AddLoadFields("Price Calculation Method", "Sell-to Customer No.", "Customer Disc. Group", "Customer Price Group", "VAT %", "VAT Calculation Type", "VAT Bus. Posting Group", "VAT Prod. Posting Group", "Dimension Set ID", "Currency Code", "Qty. per Unit of Measure", "Allow Line Disc.");
 
         DocumentTotals.SalesCheckAndClearTotals(Rec, xRec, TotalSalesLine, VATAmount, InvoiceDiscountAmount, InvoiceDiscountPct);
         exit(Rec.Find(Which));
