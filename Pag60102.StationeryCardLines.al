@@ -1235,6 +1235,8 @@ page 60102 "Stationery Card Lines"
 
         RecRef.GetTable(Rec);
         TypeAsText := TempOptionLookupBuffer.FormatOption(RecRef.Field(Rec.FieldNo(Type)));
+        // Default quantity to 1
+        Rec.Quantity:=1;
     end;
 
     local procedure SetItemChargeFieldsStyle()
@@ -1287,7 +1289,6 @@ page 60102 "Stationery Card Lines"
             exit;
 
         if xRec."Document No." = '' then
-            // Rec.Type := Rec.GetDefaultLineType();
             Rec.Type := Rec.Type::Item;
     end;
 

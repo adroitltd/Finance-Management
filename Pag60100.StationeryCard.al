@@ -158,6 +158,21 @@ page 60100 "Stationery Card"
                         end;
                     }
                 }
+                field(Seller; Rec.Seller)
+                {
+                    ApplicationArea=Basic, Suite;
+                    Editable=false;
+                }
+                field("Payment Method"; Rec."ASL.Payment Method")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Payment Method';
+                }
+                field("ASL.CashPaymentAccountNo"; Rec."ASL.CashPaymentAccountNo")
+                {
+                    ApplicationArea=Basic, Suite;
+                    Caption='Payment Account No.';
+                }
             }
             part(StationeryLines; "Stationery Card Lines")
             {
@@ -222,9 +237,7 @@ page 60100 "Stationery Card"
 
                     trigger OnAction()
                     begin
-                        ValidateLocationCode(Rec);
                         PostSalesOrder(CODEUNIT::"Sales-Post (Yes/No)", Enum::"Navigate After Posting"::"Do Nothing");
-                        "Receive Payment From Customer and Print a Receipt"();
                     end;
                 }
                 action("Test Report")
@@ -239,7 +252,6 @@ page 60100 "Stationery Card"
 
                     trigger OnAction()
                     begin
-                        ValidateLocationCode(Rec);
                         ReportPrint.PrintSalesHeader(Rec);
                     end;
                 }
@@ -255,7 +267,6 @@ page 60100 "Stationery Card"
 
                     trigger OnAction()
                     begin
-                        ValidateLocationCode(Rec);
                         ShowPreview();
                     end;
                 }
@@ -335,8 +346,6 @@ page 60100 "Stationery Card"
     trigger OnOpenPage()
     var
         PaymentServiceSetup: Record "Payment Service Setup";
-        OfficeMgt: Codeunit "Office Management";
-        EnvironmentInfo: Codeunit "Environment Information";
         ApplicationAreaMgmtFacade: Codeunit "Application Area Mgmt. Facade";
     begin
         Rec.SetSecurityFilterOnRespCenter();
@@ -346,9 +355,6 @@ page 60100 "Stationery Card"
         ActivateFields();
 
         SetDocNoVisible();
-
-        IsOfficeHost := OfficeMgt.IsAvailable();
-        IsSaas := EnvironmentInfo.IsSaaS();
 
         if (Rec."No." <> '') and (Rec."Sell-to Customer No." = '') then
             DocumentIsPosted := (not Rec.Get(Rec."Document Type", Rec."No."));
@@ -402,7 +408,6 @@ page 60100 "Stationery Card"
         DocNoVisible: Boolean;
         ExternalDocNoMandatory: Boolean;
         ShowWorkflowStatus: Boolean;
-        IsOfficeHost: Boolean;
         DocumentIsScheduledForPosting: Boolean;
         OpenPostedSalesOrderQst: Label 'The Stationery Order is posted as number %1 and moved to the Posted Sales Invoices window.\\Do you want to open the posted invoice?', Comment = '%1 = posted document number';
         PaymentServiceVisible: Boolean;
@@ -414,7 +419,6 @@ page 60100 "Stationery Card"
         SalesDocCheckFactboxVisible: Boolean;
         WorkDescription: Text;
         StatusStyleTxt: Text;
-        IsSaas: Boolean;
         IsBillToCountyVisible: Boolean;
         IsSellToCountyVisible: Boolean;
         IsShipToCountyVisible: Boolean;
@@ -423,6 +427,7 @@ page 60100 "Stationery Card"
         IsSalesLinesEditable: Boolean;
         ShouldSearchForCustByName: Boolean;
         IsBidirectionalSyncEnabled: Boolean;
+        FinanceManagement: Codeunit "Finance Management";
 
     protected var
         ShipToOptions: Enum "Sales Ship-to Options";
@@ -660,79 +665,6 @@ page 60100 "Stationery Card"
             exit(LocationsQuery.Read());
         end;
         exit(false);
-    end;
-
-    local procedure ValidateLocationCode(SalesHeader: Record "Sales Header"): Boolean
-    var
-        SalesLines: Record "Sales Line";
-    begin
-        SalesLines.SetRange("Document Type", SalesLines."Document Type"::Order);
-        SalesLines.SetRange("Document No.", SalesHeader."No.");
-        SalesLines.SetRange(Type, SalesLines.Type::Item);
-        if SalesLines.FindSet() then begin
-            repeat
-                if SalesLines."Location Code" = '' then begin
-                    SalesLines.TestField("Location Code");
-                    exit(false);
-                end;
-            until SalesLines.Next() = 0;
-        end;
-        exit(true);
-    end;
-
-// Receive Payment
-    local procedure "Receive Payment From Customer and Print a Receipt"()
-    var
-        GeneralLedgerEntry: Record "G/L Entry";
-        CustomerLedgerEntry: Record "Cust. Ledger Entry";
-        GenJournalBatch: Record "Gen. Journal Line";
-        GenJournalLine: Record "Gen. Journal Line";
-        Customer: Record Customer;
-        PostingDate, VATDate: Date;
-        DocumentNo, AccountNo, BalancingAccountNo, CustomerNo : Code[20];
-        Description: Text[200];
-        Amount: Decimal;
-        GenJournalTemplateName: Code[10];
-        GenJournalBatchName: Code[10];
-        GenJournalLineNo: Integer;
-        BankAccounts: Record "Bank Account";
-    begin
-        GenJournalTemplateName := 'PAYMENT';
-        GenJournalBatchName := 'DEFAULT';
-
-        if not GenJournalBatch.Get(GenJournalTemplateName, GenJournalBatchName) then begin
-            GenJournalBatch.Init();
-            GenJournalBatch."Journal Template Name" := GenJournalTemplateName;
-            GenJournalBatch."Journal Batch Name" := GenJournalBatchName;
-            GenJournalBatch.Modify();
-        end;
-
-        GenJournalLine.Init();
-        if GenJournalLine.Find() then GenJournalLine.DeleteAll();
-        GenJournalLine."Journal Template Name" := GenJournalTemplateName;
-        GenJournalLine."Journal Batch Name" := GenJournalBatchName;
-        GenJournalLine."Line No." := 10000;
-
-        // Retrieve customer information
-        CustomerNo := 'STA_00001';
-        if not Customer.Get(CustomerNo) then
-            Error('Customer %1 not found', CustomerNo);
-
-        // Create a G/L entry for the payment
-        GenJournalLine."Posting Date" := Today;
-        GenJournalLine."Document Type" := GenJournalLine."Document Type"::Payment;
-        GenJournalLine."Document No." := 'MANUAL_PAY001';
-        GenJournalLine."Account Type" := GenJournalLine."Account Type"::Customer;
-        GenJournalLine."Account No." := CustomerNo;
-        GenJournalLine.Description := 'TEST MANUAL PAY===STATTIONERY';
-        GenJournalLine."Amount" := -1000.00;
-        GenJournalLine."Bal. Account Type" := GenJournalLine."Bal. Account Type"::"Bank Account";
-        GenJournalLine."Bal. Account No." := 'BNK_0001';
-        GenJournalLine.Modify();
-
-        // Post the General Journal
-        Codeunit.Run(CODEUNIT::"Gen. Jnl.-Post+Print", GenJournalLine);
-
     end;
 
     [IntegrationEvent(false, false)]
