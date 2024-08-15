@@ -5,7 +5,6 @@ using Microsoft.Finance.GeneralLedger.Ledger;
 using Microsoft.Foundation.Company;
 using Microsoft.Bank.Check;
 using Microsoft.Purchases.History;
-using Microsoft.Sales.History;
 
 report 60103 "Stationery Receipt"
 {

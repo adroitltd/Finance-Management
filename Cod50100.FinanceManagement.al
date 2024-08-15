@@ -2,26 +2,18 @@ codeunit 60100 "Finance Management"
 {
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        DimMgmt: Codeunit DimensionManagement;
         NoSeriesMgmt: Codeunit "No. Series";
         GotSalesSetup: Boolean;
-
-        TempBlob: Codeunit "Temp Blob";
-        OutStream: OutStream;
-        InStream: InStream;
-        RecRef: RecordRef;
-        FileName: Text;
-        GenJnlLinePrint: Codeunit "Gen. Jnl.-Post+Print";
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', false, false)]
     local procedure OnAfterSubstituteLPOReport(ReportId: Integer; var NewReportId: Integer)
     begin
         if ReportId = Report::Order then
             NewReportId := Report::"LPO Report";
-            
+
         if ReportId = Report::"Standard Sales - Invoice" then
             NewReportId := Report::"Tax Invoice Report";
-    
+
         if ReportId = Report::"G/L Register" then
             NewReportId := Report::"Stationery Receipt";
     end;
@@ -104,7 +96,7 @@ codeunit 60100 "Finance Management"
             PaymentDocumentNo,
             "Gen. Journal Account Type"::Customer,
             SalesInvHeader."Bill-to Customer No.",
-            'Cash Sale - ' + SalesInvHeader."No.",
+            SalesInvHeader."Sell-to Customer Name",
             0,
             SalesInvHeader."Amount Including VAT",
             "Gen. Journal Account Type"::"Bank Account",
@@ -183,40 +175,36 @@ codeunit 60100 "Finance Management"
 
         // post and print
         if Post then begin
-            // RecRef.GetTable(GenJournalLine);
             GenJnlPostLine.RunWithCheck(GenJournalLine);
             Message('Journal Lines were posted successfully');
-            // RecRef.SetTable(GenJournalLine);
-            // TempBlob.CreateOutStream(OutStream);
-            // Report.SaveAs(60104, '', ReportFormat::Pdf, OutStream, RecRef);
-            // TempBlob.CreateInStream(InStream);
-            // FileName:='CustomerReceipt.pdf';
-            // DownloadFromStream(InStream, '', '', '', FileName);
         end
         else
-            Error('An error has ocurred try again');   
+            Error('An error has ocurred try again');
     end;
 
-// Does not print correctly it brings two extra pages
-   [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnBeforePostGenJnlLine', '', false, false)]
-    local procedure PrintCustomerReceipt(var GenJournalLine: Record "Gen. Journal Line")
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnAfterPostGenJnlLine', '', false, false)]
+    local procedure PrintCustomerReceiptAfterPostingPayment(var GenJournalLine: Record "Gen. Journal Line")
     var
         TempBlob: Codeunit "Temp Blob";
         OutStream: OutStream;
         InStream: InStream;
         FileName: Text;
         RecRef: RecordRef;
+        GenJnlLineFilter: Record "Gen. Journal Line";
     begin
-        if GenJournalLine."Source Code" = SalesSetup."ASL.CashSalesSourceCode" then begin
-            if (GenJournalLine."Document No." <> '') and (GenJournalLine."Amount" > 0) then begin
-                RecRef.GetTable(GenJournalLine);
+        GenJnlLineFilter.Reset();
+        GenJnlLineFilter.SetRange("Journal Template Name", GenJournalLine."Journal Template Name");
+        GenJnlLineFilter.SetRange("Journal Batch Name", GenJournalLine."Journal Batch Name");
+        GenJnlLineFilter.SetRange("Document No.", GenJournalLine."Document No.");
+        if GenJnlLineFilter.FindSet() then begin
+            repeat begin
+                RecRef.GetTable(GenJnlLineFilter);
                 TempBlob.CreateOutStream(OutStream);
                 Report.SaveAs(60104, '', ReportFormat::Pdf, OutStream, RecRef);
                 TempBlob.CreateInStream(InStream);
                 FileName := 'CustomerReceipt.pdf';
                 DownloadFromStream(InStream, 'Printing Customer Receipt', '', '', FileName);
-                Message('Customer receipt has been printed successfully.');
-            end;
+            end until GenJnlLineFilter.Next() = 0;
         end;
     end;
 }
