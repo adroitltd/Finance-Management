@@ -1,9 +1,3 @@
-namespace FinanceManagement.FinanceManagement;
-
-using Microsoft.Finance.GeneralLedger.Journal;
-using Microsoft.Bank.Check;
-using Microsoft.Foundation.Company;
-
 report 50104 "ASL.CustomerReceipt"
 {
     ApplicationArea = Basic, Suite;

@@ -1,11 +1,3 @@
-namespace Microsoft.Finance.GeneralLedger.Reports;
-
-using Microsoft.Finance.GeneralLedger.Account;
-using Microsoft.Finance.GeneralLedger.Ledger;
-using Microsoft.Foundation.Company;
-using Microsoft.Bank.Check;
-using Microsoft.Purchases.History;
-
 report 50103 "Stationery Receipt"
 {
     Caption = 'Stationery Receipt';

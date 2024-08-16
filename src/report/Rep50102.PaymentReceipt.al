@@ -1,37 +1,3 @@
-namespace Microsoft.Sales.History;
-
-using Microsoft.Assembly.History;
-using Microsoft.Bank.BankAccount;
-using Microsoft.Bank.Setup;
-using Microsoft.CRM.Contact;
-using Microsoft.CRM.Interaction;
-using Microsoft.CRM.Segment;
-using Microsoft.CRM.Team;
-using Microsoft.Finance.Currency;
-using Microsoft.Finance.GeneralLedger.Setup;
-using Microsoft.Finance.VAT.Calculation;
-using Microsoft.Finance.VAT.Clause;
-using Microsoft.Foundation.Address;
-using Microsoft.Foundation.Company;
-using Microsoft.Foundation.PaymentTerms;
-using Microsoft.Foundation.Reporting;
-using Microsoft.Foundation.Shipping;
-using Microsoft.Foundation.UOM;
-using Microsoft.Inventory.Ledger;
-using Microsoft.Bank.Check;
-using Microsoft.Inventory.Location;
-using Microsoft.Projects.Project.Job;
-using Microsoft.Sales.Customer;
-using Microsoft.Sales.Receivables;
-using Microsoft.Sales.Reminder;
-using Microsoft.Sales.Setup;
-using Microsoft.Utilities;
-using System.Email;
-using System.Globalization;
-using System.Reflection;
-using System.Text;
-using System.Utilities;
-
 report 50102 "Payment Receipt"
 {
     Caption = 'Payment Receipt';
