@@ -10,7 +10,6 @@ permissionset 50100 extensionPermission
         report "Payment Receipt" = X,
         report "Stationery Receipt" = X,
         report "Tax Invoice Report" = X,
-        codeunit "ASL.EmailManagement" = X,
         codeunit "ASL.WriteAmountInWords" = X,
         codeunit "Finance Management" = X,
         page "ASL.CashSaleSetup" = X,
