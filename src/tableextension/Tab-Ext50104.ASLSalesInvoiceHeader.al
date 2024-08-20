@@ -6,10 +6,6 @@ using System.Security.User;
 
 tableextension 50104 "ASL.SalesInvoiceHeader" extends "Sales Invoice Header"
 {
-    // <summary>
-    // NB: Make sure these fields have the same ids as in sales order
-    // </summary>
-    // <param name="ASL.SalesInvoiceHeader"></param>
     fields
     {
         field(50100; "Seller"; Code[20])

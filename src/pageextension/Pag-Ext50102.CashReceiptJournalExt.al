@@ -21,6 +21,23 @@ pageextension 50102 "Cash Receipt Journal Ext" extends "Cash Receipt Journal"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Post';
+                    Image = Post;
+                    ShortCutKey = 'Shift+F9';
+                    ToolTip = 'Finalize and prepare to print the document or journal. The values and quantities are posted to the related accounts. A report request window where you can specify what to include on the print-out.';
+                    Promoted = true;
+                    PromotedCategory = Category6;
+
+                    trigger OnAction()
+                    begin
+                        Rec.SendToPosting(Codeunit::"Gen. Jnl.-Post");
+                        CurrentJnlBatchName := Rec.GetRangeMax("Journal Batch Name");
+                        CurrPage.Update(false);
+                    end;
+                }
+                action("Post and Print")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Post and Print';
                     Image = PostPrint;
                     ShortCutKey = 'Shift+F9';
                     ToolTip = 'Finalize and prepare to print the document or journal. The values and quantities are posted to the related accounts. A report request window where you can specify what to include on the print-out.';

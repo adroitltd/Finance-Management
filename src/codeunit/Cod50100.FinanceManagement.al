@@ -13,9 +13,6 @@ codeunit 50100 "Finance Management"
 
         if ReportId = Report::"Standard Sales - Invoice" then
             NewReportId := Report::"Tax Invoice Report";
-
-        if ReportId = Report::"G/L Register" then
-            NewReportId := Report::"Stationery Receipt";
     end;
 
     local procedure GetSalesSetup()
@@ -29,14 +26,14 @@ codeunit 50100 "Finance Management"
     var
         SalesLines: Record "Sales Line";
     begin
-        SalesHeader.TestField("ASL.Payment Method");
-        SalesHeader.TestField("ASL.CashPaymentAccountNo");
         SalesLines.SetRange("Document Type", SalesLines."Document Type"::Order);
         SalesLines.SetRange("Document No.", SalesHeader."No.");
         SalesLines.SetRange(Type, SalesLines.Type::Item);
         if SalesLines.FindSet() then begin
             repeat
                 if SalesLines."Location Code" = '' then begin
+                    SalesHeader.TestField("ASL.Payment Method");
+                    SalesHeader.TestField("ASL.CashPaymentAccountNo");
                     SalesLines.TestField("Location Code");
                 end;
             until SalesLines.Next() = 0;
@@ -47,8 +44,12 @@ codeunit 50100 "Finance Management"
     local procedure OnAfterPostSalesDoc(var SalesHeader: Record "Sales Header"; var GenJnlPostLine: Codeunit "Gen. Jnl.-Post Line"; SalesShptHdrNo: Code[20]; RetRcpHdrNo: Code[20]; SalesInvHdrNo: Code[20]; SalesCrMemoHdrNo: Code[20]; CommitIsSuppressed: Boolean; InvtPickPutaway: Boolean; var CustLedgerEntry: Record "Cust. Ledger Entry"; WhseShip: Boolean; WhseReceiv: Boolean)
     var
         SalesInvHeader: Record "Sales Invoice Header";
+        CashSalesHeader: Record "Sales Header";
     begin
         SalesInvHeader.Get(SalesInvHdrNo);
+        // Prevent this when a normal sales order is posted
+        if SalesInvHeader."ASL.CashPaymentAccountNo" = '' then
+            exit;
         // check for invoice posted from cash sale
         if SalesInvHeader."No." <> '' then begin
             SalesInvHeader.Get(SalesInvHeader."No.");
@@ -97,7 +98,6 @@ codeunit 50100 "Finance Management"
             "Gen. Journal Account Type"::Customer,
             SalesInvHeader."Bill-to Customer No.",
             SalesInvHeader."Sell-to Customer Name",
-            'Pass Books',
             0,
             SalesInvHeader."Amount Including VAT",
             "Gen. Journal Account Type"::"Bank Account",
@@ -120,7 +120,6 @@ codeunit 50100 "Finance Management"
         AccountType: Enum "Gen. Journal Account Type";
         AccountNo: Code[20];
         Description: Text[100];
-        MessageToRecipient: Text[200];
         DebitAmount: Decimal;
         CreditAmount: Decimal;
         BalAccountType: Enum "Gen. Journal Account Type";
@@ -134,19 +133,20 @@ codeunit 50100 "Finance Management"
     var
         GenJournalLine: Record "Gen. Journal Line";
         GenJnlPostLine: Codeunit "Gen. Jnl.-Post Line";
+        GenLedgerSetup: Record "General Ledger Setup";
     begin
         GenJournalLine.Init();
         GenJournalLine."Journal Template Name" := TemplateName;
         GenJournalLine."Journal Batch Name" := BatchName;
         GenJournalLine."Line No." := LineNo;
         GenJournalLine."Source Code" := SalesSetup."ASL.CashSalesSourceCode";
+        GenJournalLine."Currency Code" := GenLedgerSetup."LCY Code";
         GenJournalLine.Validate("Posting Date", PostingDate);
         GenJournalLine.Validate("Document Type", DocType);
         GenJournalLine.Validate("Document No.", DocNo);
         GenJournalLine.Validate("Account Type", AccountType);
         GenJournalLine.Validate("Account No.", AccountNo);
         GenJournalLine.Validate(Description, Description);
-        GenJournalLine.Validate("Message to Recipient", MessageToRecipient);
         if DebitAmount > 0 then
             GenJournalLine.Validate("Debit Amount", DebitAmount)
         else
@@ -199,11 +199,12 @@ codeunit 50100 "Finance Management"
         GenJnlLineFilter.SetRange("Journal Template Name", GenJournalLine."Journal Template Name");
         GenJnlLineFilter.SetRange("Journal Batch Name", GenJournalLine."Journal Batch Name");
         GenJnlLineFilter.SetRange("Document No.", GenJournalLine."Document No.");
+        GenJnlLineFilter.SetRange("Account Type", GenJournalLine."Account Type"::Customer);
         if GenJnlLineFilter.FindSet() then begin
             repeat begin
                 RecRef.GetTable(GenJnlLineFilter);
                 TempBlob.CreateOutStream(OutStream);
-                Report.SaveAs(60104, '', ReportFormat::Pdf, OutStream, RecRef);
+                Report.SaveAs(50104, '', ReportFormat::Pdf, OutStream, RecRef);
                 TempBlob.CreateInStream(InStream);
                 FileName := 'CustomerReceipt.pdf';
                 DownloadFromStream(InStream, 'Printing Customer Receipt', '', '', FileName);

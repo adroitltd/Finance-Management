@@ -25,8 +25,4 @@ tableextension 50103 "ASL.SalesHeader" extends "Sales Header"
             TableRelation = "ASL.PaymentMethod".Code;
         }
     }
-    trigger OnInsert()
-    begin
-        Rec.Seller := UserId;
-    end;
 }

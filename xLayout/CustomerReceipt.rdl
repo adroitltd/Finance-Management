@@ -25,7 +25,7 @@
                     <Value>Payment Receipt</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>15pt</FontSize>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -60,7 +60,6 @@
                     <Value>=First(Fields!CompanyName.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -124,7 +123,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CompanyPostCode.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!PostCode.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -616,7 +615,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Amount.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CreditAmount.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -902,7 +901,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>13.72333cm</Height>
+        <Height>13.935cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -973,8 +972,8 @@ End Function
         <Field Name="CompanyAddress">
           <DataField>CompanyAddress</DataField>
         </Field>
-        <Field Name="CompanyPostCode">
-          <DataField>CompanyPostCode</DataField>
+        <Field Name="PostCode">
+          <DataField>PostCode</DataField>
         </Field>
         <Field Name="CompanyPhoneNo">
           <DataField>CompanyPhoneNo</DataField>
@@ -1009,6 +1008,12 @@ End Function
         <Field Name="Description">
           <DataField>Description</DataField>
         </Field>
+        <Field Name="VAT">
+          <DataField>VAT</DataField>
+        </Field>
+        <Field Name="VATFormat">
+          <DataField>VATFormat</DataField>
+        </Field>
         <Field Name="BalAccountNo">
           <DataField>BalAccountNo</DataField>
         </Field>
@@ -1033,6 +1038,45 @@ End Function
         <Field Name="CreditAmountFormat">
           <DataField>CreditAmountFormat</DataField>
         </Field>
+        <Field Name="AmountLCY">
+          <DataField>AmountLCY</DataField>
+        </Field>
+        <Field Name="AmountLCYFormat">
+          <DataField>AmountLCYFormat</DataField>
+        </Field>
+        <Field Name="BalanceLCY">
+          <DataField>BalanceLCY</DataField>
+        </Field>
+        <Field Name="BalanceLCYFormat">
+          <DataField>BalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="CurrencyFactor">
+          <DataField>CurrencyFactor</DataField>
+        </Field>
+        <Field Name="CurrencyFactorFormat">
+          <DataField>CurrencyFactorFormat</DataField>
+        </Field>
+        <Field Name="SalesPurchLCY">
+          <DataField>SalesPurchLCY</DataField>
+        </Field>
+        <Field Name="SalesPurchLCYFormat">
+          <DataField>SalesPurchLCYFormat</DataField>
+        </Field>
+        <Field Name="ProfitLCY">
+          <DataField>ProfitLCY</DataField>
+        </Field>
+        <Field Name="ProfitLCYFormat">
+          <DataField>ProfitLCYFormat</DataField>
+        </Field>
+        <Field Name="InvDiscountLCY">
+          <DataField>InvDiscountLCY</DataField>
+        </Field>
+        <Field Name="InvDiscountLCYFormat">
+          <DataField>InvDiscountLCYFormat</DataField>
+        </Field>
+        <Field Name="BilltoPaytoNo">
+          <DataField>BilltoPaytoNo</DataField>
+        </Field>
         <Field Name="PostingGroup">
           <DataField>PostingGroup</DataField>
         </Field>
@@ -1042,11 +1086,23 @@ End Function
         <Field Name="ShortcutDimension2Code">
           <DataField>ShortcutDimension2Code</DataField>
         </Field>
+        <Field Name="SalespersPurchCode">
+          <DataField>SalespersPurchCode</DataField>
+        </Field>
+        <Field Name="PendingApproval">
+          <DataField>PendingApproval</DataField>
+        </Field>
         <Field Name="SourceCode">
           <DataField>SourceCode</DataField>
         </Field>
+        <Field Name="SystemCreatedEntry">
+          <DataField>SystemCreatedEntry</DataField>
+        </Field>
         <Field Name="YourReference">
           <DataField>YourReference</DataField>
+        </Field>
+        <Field Name="OnHold">
+          <DataField>OnHold</DataField>
         </Field>
         <Field Name="AppliestoDocType">
           <DataField>AppliestoDocType</DataField>
@@ -1054,11 +1110,281 @@ End Function
         <Field Name="AppliestoDocNo">
           <DataField>AppliestoDocNo</DataField>
         </Field>
+        <Field Name="DueDate">
+          <DataField>DueDate</DataField>
+        </Field>
+        <Field Name="PmtDiscountDate">
+          <DataField>PmtDiscountDate</DataField>
+        </Field>
+        <Field Name="PaymentDiscount">
+          <DataField>PaymentDiscount</DataField>
+        </Field>
+        <Field Name="PaymentDiscountFormat">
+          <DataField>PaymentDiscountFormat</DataField>
+        </Field>
+        <Field Name="JobNo">
+          <DataField>JobNo</DataField>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+        </Field>
+        <Field Name="QuantityFormat">
+          <DataField>QuantityFormat</DataField>
+        </Field>
+        <Field Name="VATAmount">
+          <DataField>VATAmount</DataField>
+        </Field>
+        <Field Name="VATAmountFormat">
+          <DataField>VATAmountFormat</DataField>
+        </Field>
+        <Field Name="VATPosting">
+          <DataField>VATPosting</DataField>
+        </Field>
+        <Field Name="PaymentTermsCode">
+          <DataField>PaymentTermsCode</DataField>
+        </Field>
         <Field Name="AppliestoID">
           <DataField>AppliestoID</DataField>
         </Field>
+        <Field Name="BusinessUnitCode">
+          <DataField>BusinessUnitCode</DataField>
+        </Field>
+        <Field Name="JournalBatchName">
+          <DataField>JournalBatchName</DataField>
+        </Field>
+        <Field Name="ReasonCode">
+          <DataField>ReasonCode</DataField>
+        </Field>
+        <Field Name="RecurringMethod">
+          <DataField>RecurringMethod</DataField>
+        </Field>
+        <Field Name="ExpirationDate">
+          <DataField>ExpirationDate</DataField>
+        </Field>
+        <Field Name="RecurringFrequency">
+          <DataField>RecurringFrequency</DataField>
+        </Field>
+        <Field Name="AllocatedAmtLCY">
+          <DataField>AllocatedAmtLCY</DataField>
+        </Field>
+        <Field Name="AllocatedAmtLCYFormat">
+          <DataField>AllocatedAmtLCYFormat</DataField>
+        </Field>
+        <Field Name="GenPostingType">
+          <DataField>GenPostingType</DataField>
+        </Field>
+        <Field Name="GenBusPostingGroup">
+          <DataField>GenBusPostingGroup</DataField>
+        </Field>
+        <Field Name="GenProdPostingGroup">
+          <DataField>GenProdPostingGroup</DataField>
+        </Field>
+        <Field Name="VATCalculationType">
+          <DataField>VATCalculationType</DataField>
+        </Field>
+        <Field Name="EU3PartyTrade">
+          <DataField>EU3PartyTrade</DataField>
+        </Field>
+        <Field Name="AllowApplication">
+          <DataField>AllowApplication</DataField>
+        </Field>
+        <Field Name="BalAccountType">
+          <DataField>BalAccountType</DataField>
+        </Field>
+        <Field Name="BalGenPostingType">
+          <DataField>BalGenPostingType</DataField>
+        </Field>
+        <Field Name="BalGenBusPostingGroup">
+          <DataField>BalGenBusPostingGroup</DataField>
+        </Field>
+        <Field Name="BalGenProdPostingGroup">
+          <DataField>BalGenProdPostingGroup</DataField>
+        </Field>
+        <Field Name="BalVATCalculationType">
+          <DataField>BalVATCalculationType</DataField>
+        </Field>
+        <Field Name="BalVAT">
+          <DataField>BalVAT</DataField>
+        </Field>
+        <Field Name="BalVATFormat">
+          <DataField>BalVATFormat</DataField>
+        </Field>
+        <Field Name="BalVATAmount">
+          <DataField>BalVATAmount</DataField>
+        </Field>
+        <Field Name="BalVATAmountFormat">
+          <DataField>BalVATAmountFormat</DataField>
+        </Field>
+        <Field Name="BankPaymentType">
+          <DataField>BankPaymentType</DataField>
+        </Field>
+        <Field Name="VATBaseAmount">
+          <DataField>VATBaseAmount</DataField>
+        </Field>
+        <Field Name="VATBaseAmountFormat">
+          <DataField>VATBaseAmountFormat</DataField>
+        </Field>
+        <Field Name="BalVATBaseAmount">
+          <DataField>BalVATBaseAmount</DataField>
+        </Field>
+        <Field Name="BalVATBaseAmountFormat">
+          <DataField>BalVATBaseAmountFormat</DataField>
+        </Field>
+        <Field Name="Correction">
+          <DataField>Correction</DataField>
+        </Field>
+        <Field Name="PrintPostedDocuments">
+          <DataField>PrintPostedDocuments</DataField>
+        </Field>
+        <Field Name="CheckPrinted">
+          <DataField>CheckPrinted</DataField>
+        </Field>
         <Field Name="DocumentDate">
           <DataField>DocumentDate</DataField>
+        </Field>
+        <Field Name="ExternalDocumentNo">
+          <DataField>ExternalDocumentNo</DataField>
+        </Field>
+        <Field Name="SourceType">
+          <DataField>SourceType</DataField>
+        </Field>
+        <Field Name="SourceNo">
+          <DataField>SourceNo</DataField>
+        </Field>
+        <Field Name="PostingNoSeries">
+          <DataField>PostingNoSeries</DataField>
+        </Field>
+        <Field Name="VATBusPostingGroup">
+          <DataField>VATBusPostingGroup</DataField>
+        </Field>
+        <Field Name="VATProdPostingGroup">
+          <DataField>VATProdPostingGroup</DataField>
+        </Field>
+        <Field Name="BalVATBusPostingGroup">
+          <DataField>BalVATBusPostingGroup</DataField>
+        </Field>
+        <Field Name="BalVATProdPostingGroup">
+          <DataField>BalVATProdPostingGroup</DataField>
+        </Field>
+        <Field Name="AdditionalCurrencyPosting">
+          <DataField>AdditionalCurrencyPosting</DataField>
+        </Field>
+        <Field Name="FAAddCurrencyFactor">
+          <DataField>FAAddCurrencyFactor</DataField>
+        </Field>
+        <Field Name="FAAddCurrencyFactorFormat">
+          <DataField>FAAddCurrencyFactorFormat</DataField>
+        </Field>
+        <Field Name="SourceCurrencyCode">
+          <DataField>SourceCurrencyCode</DataField>
+        </Field>
+        <Field Name="SourceCurrencyAmount">
+          <DataField>SourceCurrencyAmount</DataField>
+        </Field>
+        <Field Name="SourceCurrencyAmountFormat">
+          <DataField>SourceCurrencyAmountFormat</DataField>
+        </Field>
+        <Field Name="SourceCurrVATBaseAmount">
+          <DataField>SourceCurrVATBaseAmount</DataField>
+        </Field>
+        <Field Name="SourceCurrVATBaseAmountFormat">
+          <DataField>SourceCurrVATBaseAmountFormat</DataField>
+        </Field>
+        <Field Name="SourceCurrVATAmount">
+          <DataField>SourceCurrVATAmount</DataField>
+        </Field>
+        <Field Name="SourceCurrVATAmountFormat">
+          <DataField>SourceCurrVATAmountFormat</DataField>
+        </Field>
+        <Field Name="VATBaseDiscount">
+          <DataField>VATBaseDiscount</DataField>
+        </Field>
+        <Field Name="VATBaseDiscountFormat">
+          <DataField>VATBaseDiscountFormat</DataField>
+        </Field>
+        <Field Name="VATAmountLCY">
+          <DataField>VATAmountLCY</DataField>
+        </Field>
+        <Field Name="VATAmountLCYFormat">
+          <DataField>VATAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="VATBaseAmountLCY">
+          <DataField>VATBaseAmountLCY</DataField>
+        </Field>
+        <Field Name="VATBaseAmountLCYFormat">
+          <DataField>VATBaseAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="BalVATAmountLCY">
+          <DataField>BalVATAmountLCY</DataField>
+        </Field>
+        <Field Name="BalVATAmountLCYFormat">
+          <DataField>BalVATAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="BalVATBaseAmountLCY">
+          <DataField>BalVATBaseAmountLCY</DataField>
+        </Field>
+        <Field Name="BalVATBaseAmountLCYFormat">
+          <DataField>BalVATBaseAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="ReversingEntry">
+          <DataField>ReversingEntry</DataField>
+        </Field>
+        <Field Name="AllowZeroAmountPosting">
+          <DataField>AllowZeroAmountPosting</DataField>
+        </Field>
+        <Field Name="ShiptoOrderAddressCode">
+          <DataField>ShiptoOrderAddressCode</DataField>
+        </Field>
+        <Field Name="VATDifference">
+          <DataField>VATDifference</DataField>
+        </Field>
+        <Field Name="VATDifferenceFormat">
+          <DataField>VATDifferenceFormat</DataField>
+        </Field>
+        <Field Name="BalVATDifference">
+          <DataField>BalVATDifference</DataField>
+        </Field>
+        <Field Name="BalVATDifferenceFormat">
+          <DataField>BalVATDifferenceFormat</DataField>
+        </Field>
+        <Field Name="SelltoBuyfromNo">
+          <DataField>SelltoBuyfromNo</DataField>
+        </Field>
+        <Field Name="VATRegistrationNo">
+          <DataField>VATRegistrationNo</DataField>
+        </Field>
+        <Field Name="CountryRegionCode">
+          <DataField>CountryRegionCode</DataField>
+        </Field>
+        <Field Name="Prepayment">
+          <DataField>Prepayment</DataField>
+        </Field>
+        <Field Name="FinancialVoid">
+          <DataField>FinancialVoid</DataField>
+        </Field>
+        <Field Name="CopyVATSetuptoJnlLines">
+          <DataField>CopyVATSetuptoJnlLines</DataField>
+        </Field>
+        <Field Name="VATBaseBeforePmtDisc">
+          <DataField>VATBaseBeforePmtDisc</DataField>
+        </Field>
+        <Field Name="VATBaseBeforePmtDiscFormat">
+          <DataField>VATBaseBeforePmtDiscFormat</DataField>
+        </Field>
+        <Field Name="OrigPmtDiscPossible">
+          <DataField>OrigPmtDiscPossible</DataField>
+        </Field>
+        <Field Name="OrigPmtDiscPossibleFormat">
+          <DataField>OrigPmtDiscPossibleFormat</DataField>
+        </Field>
+        <Field Name="OrigPmtDiscPossibleLCY">
+          <DataField>OrigPmtDiscPossibleLCY</DataField>
+        </Field>
+        <Field Name="OrigPmtDiscPossibleLCYFormat">
+          <DataField>OrigPmtDiscPossibleLCYFormat</DataField>
+        </Field>
+        <Field Name="VATReportingDate">
+          <DataField>VATReportingDate</DataField>
         </Field>
         <Field Name="PaymentReference">
           <DataField>PaymentReference</DataField>
@@ -1066,8 +1392,245 @@ End Function
         <Field Name="PaymentMethodCode">
           <DataField>PaymentMethodCode</DataField>
         </Field>
+        <Field Name="AppliestoExtDocNo">
+          <DataField>AppliestoExtDocNo</DataField>
+        </Field>
+        <Field Name="InvoiceReceivedDate">
+          <DataField>InvoiceReceivedDate</DataField>
+        </Field>
+        <Field Name="KeepDescription">
+          <DataField>KeepDescription</DataField>
+        </Field>
+        <Field Name="RecipientBankAccount">
+          <DataField>RecipientBankAccount</DataField>
+        </Field>
         <Field Name="MessagetoRecipient">
           <DataField>MessagetoRecipient</DataField>
+        </Field>
+        <Field Name="ExportedtoPaymentFile">
+          <DataField>ExportedtoPaymentFile</DataField>
+        </Field>
+        <Field Name="HasPaymentExportError">
+          <DataField>HasPaymentExportError</DataField>
+        </Field>
+        <Field Name="DimensionSetID">
+          <DataField>DimensionSetID</DataField>
+        </Field>
+        <Field Name="DirectDebitMandateID">
+          <DataField>DirectDebitMandateID</DataField>
+        </Field>
+        <Field Name="DataExchEntryNo">
+          <DataField>DataExchEntryNo</DataField>
+        </Field>
+        <Field Name="PayerInformation">
+          <DataField>PayerInformation</DataField>
+        </Field>
+        <Field Name="TransactionInformation">
+          <DataField>TransactionInformation</DataField>
+        </Field>
+        <Field Name="DataExchLineNo">
+          <DataField>DataExchLineNo</DataField>
+        </Field>
+        <Field Name="AppliedAutomatically">
+          <DataField>AppliedAutomatically</DataField>
+        </Field>
+        <Field Name="LinkedTableID">
+          <DataField>LinkedTableID</DataField>
+        </Field>
+        <Field Name="LinkedSystemID">
+          <DataField>LinkedSystemID</DataField>
+        </Field>
+        <Field Name="DeferralCode">
+          <DataField>DeferralCode</DataField>
+        </Field>
+        <Field Name="DeferralLineNo">
+          <DataField>DeferralLineNo</DataField>
+        </Field>
+        <Field Name="SelectedAllocAccountNo">
+          <DataField>SelectedAllocAccountNo</DataField>
+        </Field>
+        <Field Name="AllocAccModifiedbyUser">
+          <DataField>AllocAccModifiedbyUser</DataField>
+        </Field>
+        <Field Name="AllocationAccountNo">
+          <DataField>AllocationAccountNo</DataField>
+        </Field>
+        <Field Name="CampaignNo">
+          <DataField>CampaignNo</DataField>
+        </Field>
+        <Field Name="ProdOrderNo">
+          <DataField>ProdOrderNo</DataField>
+        </Field>
+        <Field Name="FAPostingDate">
+          <DataField>FAPostingDate</DataField>
+        </Field>
+        <Field Name="FAPostingType">
+          <DataField>FAPostingType</DataField>
+        </Field>
+        <Field Name="DepreciationBookCode">
+          <DataField>DepreciationBookCode</DataField>
+        </Field>
+        <Field Name="SalvageValue">
+          <DataField>SalvageValue</DataField>
+        </Field>
+        <Field Name="SalvageValueFormat">
+          <DataField>SalvageValueFormat</DataField>
+        </Field>
+        <Field Name="NoofDepreciationDays">
+          <DataField>NoofDepreciationDays</DataField>
+        </Field>
+        <Field Name="DepruntilFAPostingDate">
+          <DataField>DepruntilFAPostingDate</DataField>
+        </Field>
+        <Field Name="DeprAcquisitionCost">
+          <DataField>DeprAcquisitionCost</DataField>
+        </Field>
+        <Field Name="MaintenanceCode">
+          <DataField>MaintenanceCode</DataField>
+        </Field>
+        <Field Name="InsuranceNo">
+          <DataField>InsuranceNo</DataField>
+        </Field>
+        <Field Name="BudgetedFANo">
+          <DataField>BudgetedFANo</DataField>
+        </Field>
+        <Field Name="DuplicateinDepreciationBook">
+          <DataField>DuplicateinDepreciationBook</DataField>
+        </Field>
+        <Field Name="UseDuplicationList">
+          <DataField>UseDuplicationList</DataField>
+        </Field>
+        <Field Name="FAReclassificationEntry">
+          <DataField>FAReclassificationEntry</DataField>
+        </Field>
+        <Field Name="FAErrorEntryNo">
+          <DataField>FAErrorEntryNo</DataField>
+        </Field>
+        <Field Name="IndexEntry">
+          <DataField>IndexEntry</DataField>
+        </Field>
+        <Field Name="SourceLineNo">
+          <DataField>SourceLineNo</DataField>
+        </Field>
+        <Field Name="Comment">
+          <DataField>Comment</DataField>
+        </Field>
+        <Field Name="CheckExported">
+          <DataField>CheckExported</DataField>
+        </Field>
+        <Field Name="CheckTransmitted">
+          <DataField>CheckTransmitted</DataField>
+        </Field>
+        <Field Name="ReverseDateCalculation">
+          <DataField>ReverseDateCalculation</DataField>
+        </Field>
+        <Field Name="NonDeductibleVAT">
+          <DataField>NonDeductibleVAT</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATFormat">
+          <DataField>NonDeductibleVATFormat</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATBase">
+          <DataField>NonDeductibleVATBase</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATBaseFormat">
+          <DataField>NonDeductibleVATBaseFormat</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATAmount">
+          <DataField>NonDeductibleVATAmount</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATAmountFormat">
+          <DataField>NonDeductibleVATAmountFormat</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATBaseLCY">
+          <DataField>NonDeductibleVATBaseLCY</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATBaseLCYFormat">
+          <DataField>NonDeductibleVATBaseLCYFormat</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATAmountLCY">
+          <DataField>NonDeductibleVATAmountLCY</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATAmountLCYFormat">
+          <DataField>NonDeductibleVATAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATBaseACY">
+          <DataField>NonDeductibleVATBaseACY</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATBaseACYFormat">
+          <DataField>NonDeductibleVATBaseACYFormat</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATAmountACY">
+          <DataField>NonDeductibleVATAmountACY</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATAmountACYFormat">
+          <DataField>NonDeductibleVATAmountACYFormat</DataField>
+        </Field>
+        <Field Name="FAGLAccountNo">
+          <DataField>FAGLAccountNo</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATDiff">
+          <DataField>NonDeductibleVATDiff</DataField>
+        </Field>
+        <Field Name="NonDeductibleVATDiffFormat">
+          <DataField>NonDeductibleVATDiffFormat</DataField>
+        </Field>
+        <Field Name="BalNonDedVAT">
+          <DataField>BalNonDedVAT</DataField>
+        </Field>
+        <Field Name="BalNonDedVATFormat">
+          <DataField>BalNonDedVATFormat</DataField>
+        </Field>
+        <Field Name="BalNonDedVATBase">
+          <DataField>BalNonDedVATBase</DataField>
+        </Field>
+        <Field Name="BalNonDedVATBaseFormat">
+          <DataField>BalNonDedVATBaseFormat</DataField>
+        </Field>
+        <Field Name="BalNonDedVATAmount">
+          <DataField>BalNonDedVATAmount</DataField>
+        </Field>
+        <Field Name="BalNonDedVATAmountFormat">
+          <DataField>BalNonDedVATAmountFormat</DataField>
+        </Field>
+        <Field Name="BalNonDedVATBaseLCY">
+          <DataField>BalNonDedVATBaseLCY</DataField>
+        </Field>
+        <Field Name="BalNonDedVATBaseLCYFormat">
+          <DataField>BalNonDedVATBaseLCYFormat</DataField>
+        </Field>
+        <Field Name="BalNonDedVATAmountLCY">
+          <DataField>BalNonDedVATAmountLCY</DataField>
+        </Field>
+        <Field Name="BalNonDedVATAmountLCYFormat">
+          <DataField>BalNonDedVATAmountLCYFormat</DataField>
+        </Field>
+        <Field Name="AccountId">
+          <DataField>AccountId</DataField>
+        </Field>
+        <Field Name="CustomerId">
+          <DataField>CustomerId</DataField>
+        </Field>
+        <Field Name="AppliestoInvoiceId">
+          <DataField>AppliestoInvoiceId</DataField>
+        </Field>
+        <Field Name="ContactGraphId">
+          <DataField>ContactGraphId</DataField>
+        </Field>
+        <Field Name="LastModifiedDateTime">
+          <DataField>LastModifiedDateTime</DataField>
+        </Field>
+        <Field Name="JournalBatchId">
+          <DataField>JournalBatchId</DataField>
+        </Field>
+        <Field Name="PaymentMethodId">
+          <DataField>PaymentMethodId</DataField>
+        </Field>
+        <Field Name="BalanceAccountId">
+          <DataField>BalanceAccountId</DataField>
+        </Field>
+        <Field Name="VendorId">
+          <DataField>VendorId</DataField>
         </Field>
         <Field Name="AmountInWords">
           <DataField>AmountInWords</DataField>

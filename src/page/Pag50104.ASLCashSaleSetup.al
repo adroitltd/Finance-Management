@@ -3,7 +3,7 @@ namespace FinanceManagement.FinanceManagement;
 page 50104 "ASL.CashSaleSetup"
 {
     ApplicationArea = All;
-    Caption = 'ASL.CashSaleSetup';
+    Caption = 'Cash Sale Setup';
     PageType = List;
     SourceTable = "ASL.CashSaleSetup";
     UsageCategory = Lists;

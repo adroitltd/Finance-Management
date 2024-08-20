@@ -7,6 +7,7 @@ using Microsoft.CRM.Outlook;
 
 codeunit 50102 "ASL.EmailManagement"
 {
+    // NOT yet working
     var
         TempEmailItem: Record "Email Item" temporary;
         GlobalHideDialog: Boolean;

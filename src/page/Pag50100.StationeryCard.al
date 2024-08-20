@@ -31,7 +31,6 @@ page 50100 "Stationery Card"
     UsageCategory = Documents;
     AboutTitle = 'About Stationery Card details';
     AboutText = 'Choose the Stationery details and fill in Stationery lines with quantities of what you are selling. Post the Stationery when you are ready to ship or invoice. This creates posted sales shipments and posted sales invoices.';
-    PromotedActionCategories = 'New,Process,Report,Posting';
 
     layout
     {
@@ -42,8 +41,9 @@ page 50100 "Stationery Card"
                 Caption = 'General';
                 field("No."; Rec."No.")
                 {
-                    ApplicationArea = All;
+                    ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies the number of the involved entry or record, according to the specified number series.';
+                    Caption = 'No.';
                     Visible = DocNoVisible;
 
                     trigger OnAssistEdit()
@@ -64,6 +64,7 @@ page 50100 "Stationery Card"
                     begin
                         IsSalesLinesEditable := Rec.SalesLinesEditable();
                         Rec.SelltoCustomerNoOnAfterValidate(Rec, xRec);
+                        GetSellerDetails();
                         CurrPage.Update();
                     end;
                 }
@@ -79,6 +80,7 @@ page 50100 "Stationery Card"
                     trigger OnValidate()
                     begin
                         Rec.SelltoCustomerNoOnAfterValidate(Rec, xRec);
+                        GetSellerDetails();
                         CurrPage.Update();
                     end;
 
@@ -157,11 +159,13 @@ page 50100 "Stationery Card"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Payment Method';
+                    Editable = false;
                 }
                 field("ASL.CashPaymentAccountNo"; Rec."ASL.CashPaymentAccountNo")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Payment Account No.';
+                    Editable = false;
                 }
             }
             part(StationeryLines; "Stationery Card Lines")
@@ -218,7 +222,7 @@ page 50100 "Stationery Card"
                 Ellipsis = true;
                 Image = PostOrder;
                 Promoted = true;
-                PromotedCategory = Category4;
+                PromotedCategory = Process;
                 ShortCutKey = 'F9';
                 ToolTip = 'Finalize the document or journal by posting the amounts and quantities to the related accounts in your company books.';
                 AboutTitle = 'Posting the order';
@@ -229,28 +233,13 @@ page 50100 "Stationery Card"
                     PostSalesOrder(CODEUNIT::"Sales-Post (Yes/No)", Enum::"Navigate After Posting"::"Do Nothing");
                 end;
             }
-            action("Test Report")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Test Report';
-                Ellipsis = true;
-                Image = TestReport;
-                Promoted = true;
-                PromotedCategory = Category4;
-                ToolTip = 'View a test report so that you can find and correct any errors before you perform the actual posting of the journal or document.';
-
-                trigger OnAction()
-                begin
-                    ReportPrint.PrintSalesHeader(Rec);
-                end;
-            }
             action(PreviewPosting)
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Preview Posting';
                 Image = ViewPostedOrder;
                 Promoted = true;
-                PromotedCategory = Category4;
+                PromotedCategory = Process;
                 ShortCutKey = 'Ctrl+Alt+F9';
                 ToolTip = 'Review the different types of entries that will be created when you post the document or journal.';
 
@@ -319,6 +308,8 @@ page 50100 "Stationery Card"
 
         if (Rec."Sell-to Customer No." = '') and (Rec.GetFilter("Sell-to Customer No.") <> '') then
             CurrPage.Update(false);
+
+        GetSellerDetails();
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
@@ -390,6 +381,8 @@ page 50100 "Stationery Card"
         PrivacyNotice: Codeunit "Privacy Notice";
         PrivacyNoticeRegistrations: Codeunit "Privacy Notice Registrations";
         ChangeExchangeRate: Page "Change Exchange Rate";
+        CashSaleSetup: Record "ASL.CashSaleSetup";
+        UserSetup: Record "User Setup";
         Usage: Option "Order Confirmation","Work Order","Pick Instruction";
         Text001: Label 'Do you want to change %1 in all related records in the warehouse?';
         Text002: Label 'The update has been interrupted to respect the warning.';
@@ -433,6 +426,25 @@ page 50100 "Stationery Card"
         IsJournalTemplNameVisible := GLSetup."Journal Templ. Name Mandatory";
         IsPaymentMethodCodeVisible := not GLSetup."Hide Payment Method Code";
         IsSalesLinesEditable := Rec.SalesLinesEditable();
+    end;
+
+    local procedure GetSellerDetails()
+    begin
+        UserSetup.Reset();
+        UserSetup.SetRange("User ID", UserId);
+
+        if UserSetup.FindFirst() then begin
+            CashSaleSetup.Reset();
+            CashSaleSetup.SetRange("Seller", UserSetup."User ID");
+
+            if CashSaleSetup.FindFirst() then begin
+                Rec.Seller := CashSaleSetup.Seller;
+                Rec."ASL.Payment Method" := CashSaleSetup."Payment Method";
+                Rec."ASL.CashPaymentAccountNo" := CashSaleSetup."Bank/Cash Account No.";
+            end else
+                Error('No Cash Sale Setup found for Seller %1', UserSetup."User ID");
+        end else
+            Error('No User Setup found for User %1', UserId);
     end;
 
     protected procedure PostSalesOrder(PostingCodeunitID: Integer; Navigate: Enum "Navigate After Posting")

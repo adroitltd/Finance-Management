@@ -3,7 +3,7 @@ report 50104 "ASL.CustomerReceipt"
     ApplicationArea = Basic, Suite;
     Caption = 'ASL.CustomerReceipt';
     UsageCategory = ReportsAndAnalysis;
-    DefaultRenderingLayout = "CustomerReceipt.docx";
+    DefaultRenderingLayout = "CustomerReceipt.rdl";
     WordMergeDataItem = GenJournalLine;
 
     dataset
@@ -11,7 +11,25 @@ report 50104 "ASL.CustomerReceipt"
         dataitem(GenJournalLine; "Gen. Journal Line")
         {
             RequestFilterHeading = 'Customer Receipt';
+            column(CompanyPicture; CompanyInfo.Picture)
+            {
+            }
             column(CompanyName; CompanyInfo.Name)
+            {
+            }
+            column(CompanyAddress; CompanyInfo.Address)
+            {
+            }
+            column(PostCode; CompanyInfo."Post Code" + ' ' + CompanyInfo.City)
+            {
+            }
+            column(CompanyPhoneNo; CompanyInfo."Phone No.")
+            {
+            }
+            column(CompanyVATRegNo; CompanyInfo."VAT Registration No.")
+            {
+            }
+            column(CompanyTIN; CompanyInfo."TIN NO.")
             {
             }
             column(JournalTemplateName; "Journal Template Name")
@@ -531,11 +549,7 @@ report 50104 "ASL.CustomerReceipt"
             trigger OnAfterGetRecord()
             begin
                 WriteAmountInWords.InitTextVariable();
-                WriteAmountInWords.FormatNoText(NoText, "Debit Amount", '');
-
-                // ReportCheck.InitTextVariable();
-                // ReportCheck.FormatNoText(NoText, Round(GenJournalLine."Debit Amount", 0.01), '');
-                // AmountInWords := NoText[1];
+                WriteAmountInWords.FormatNoText(NoText, "Credit Amount", '');
             end;
         }
     }
@@ -561,12 +575,12 @@ report 50104 "ASL.CustomerReceipt"
 
     rendering
     {
-        layout("CustomerReceipt.docx")
+        layout("CustomerReceipt.rdl")
         {
-            Type = Word;
-            LayoutFile = './xLayout/CustomerReceipt.docx';
-            Caption = 'Customer Receipt (WORD)';
-            Summary = 'The Customer Receipt (WORD) provides a basic layout.';
+            Type = RDLC;
+            LayoutFile = './xLayout/CustomerReceipt.rdl';
+            Caption = 'Customer Receipt (RDLC)';
+            Summary = 'The Customer Receipt (RDLC) provides a basic layout.';
         }
     }
 
@@ -578,8 +592,6 @@ report 50104 "ASL.CustomerReceipt"
 
     var
         CompanyInfo: Record "Company Information";
-        ReportCheck: Report Check;
         NoText: array[1] of Text;
-        AmountInWords: Text;
         WriteAmountInWords: Codeunit "ASL.WriteAmountInWords";
 }
