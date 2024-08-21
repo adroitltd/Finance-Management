@@ -14,7 +14,7 @@ permissionset 50100 extensionPermission
         codeunit "Finance Management" = X,
         page "ASL.CashSaleSetup" = X,
         page "ASL.PaymentMethods" = X,
-        page "Stationery Card" = X,
+        page "Stationery Sales" = X,
         page "Stationery Card Lines" = X,
         page "Stationery Sales Line FactBox" = X,
         page "Stationery Sells History" = X;

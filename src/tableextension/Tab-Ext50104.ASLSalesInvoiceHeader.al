@@ -24,5 +24,20 @@ tableextension 50104 "ASL.SalesInvoiceHeader" extends "Sales Invoice Header"
             DataClassification = CustomerContent;
             TableRelation = "ASL.PaymentMethod".Code;
         }
+        field(50103; "Cash Sale Receipt No."; Code[20])
+        {
+            Caption = 'Cash Sale Receipt No.';
+            DataClassification = ToBeClassified;
+        }
+        field(50104; "Cash Sale Cust. Name"; Text[100])
+        {
+            Caption = 'Cash Sale Cust. Name';
+            DataClassification = ToBeClassified;
+        }
+        field(50105; "Cash Sale Cust. Telephone No."; Text[15])
+        {
+            Caption = 'Cash Sale Cust. Telephone No.';
+            DataClassification = ToBeClassified;
+        }
     }
 }

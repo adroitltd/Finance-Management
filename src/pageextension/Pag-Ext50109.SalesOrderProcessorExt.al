@@ -47,10 +47,10 @@ pageextension 50109 "Sales Order Processor Ext" extends "Order Processor Role Ce
     {
         addafter("Sales &Order")
         {
-            action("Stationery Card")
+            action("Stationery Sales")
             {
                 ApplicationArea = Basic, Suite;
-                RunObject = page "Stationery Card";
+                RunObject = page "Stationery Sales";
                 RunPageMode = Create;
             }
         }

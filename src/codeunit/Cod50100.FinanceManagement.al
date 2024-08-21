@@ -97,7 +97,8 @@ codeunit 50100 "Finance Management"
             PaymentDocumentNo,
             "Gen. Journal Account Type"::Customer,
             SalesInvHeader."Bill-to Customer No.",
-            SalesInvHeader."Sell-to Customer Name",
+            SalesInvHeader."Cash Sale Cust. Name",
+            SalesInvHeader."Cash Sale Cust. Telephone No.",
             0,
             SalesInvHeader."Amount Including VAT",
             "Gen. Journal Account Type"::"Bank Account",
@@ -119,7 +120,8 @@ codeunit 50100 "Finance Management"
         DocNo: Code[20];
         AccountType: Enum "Gen. Journal Account Type";
         AccountNo: Code[20];
-        Description: Text[100];
+        CustomerName: Text[100];
+        CustomerTelephoneNo: Text[15];
         DebitAmount: Decimal;
         CreditAmount: Decimal;
         BalAccountType: Enum "Gen. Journal Account Type";
@@ -138,6 +140,7 @@ codeunit 50100 "Finance Management"
         GenJournalLine.Init();
         GenJournalLine."Journal Template Name" := TemplateName;
         GenJournalLine."Journal Batch Name" := BatchName;
+        // GenJournalLine."Cash Sale Receipt No." := 
         GenJournalLine."Line No." := LineNo;
         GenJournalLine."Source Code" := SalesSetup."ASL.CashSalesSourceCode";
         GenJournalLine."Currency Code" := GenLedgerSetup."LCY Code";
@@ -146,7 +149,8 @@ codeunit 50100 "Finance Management"
         GenJournalLine.Validate("Document No.", DocNo);
         GenJournalLine.Validate("Account Type", AccountType);
         GenJournalLine.Validate("Account No.", AccountNo);
-        GenJournalLine.Validate(Description, Description);
+        GenJournalLine.Validate("Cash Sale Cust. Name", CustomerName);
+        GenJournalLine.Validate("Cash Sale Cust. Telephone No.", CustomerTelephoneNo);
         if DebitAmount > 0 then
             GenJournalLine.Validate("Debit Amount", DebitAmount)
         else

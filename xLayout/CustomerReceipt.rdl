@@ -364,7 +364,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Description.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Cash_Sale_Cust__Name.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -983,6 +983,9 @@ End Function
         </Field>
         <Field Name="CompanyTIN">
           <DataField>CompanyTIN</DataField>
+        </Field>
+        <Field Name="Cash_Sale_Cust__Name">
+          <DataField>Cash_Sale_Cust__Name</DataField>
         </Field>
         <Field Name="JournalTemplateName">
           <DataField>JournalTemplateName</DataField>

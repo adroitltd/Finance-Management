@@ -19,10 +19,10 @@ using System.Environment.Configuration;
 using System.Privacy;
 using System.Security.User;
 
-page 50100 "Stationery Card"
+page 50100 "Stationery Sales"
 {
     ApplicationArea = All;
-    Caption = 'Stationery Card';
+    Caption = 'Stationery Sales';
     PageType = Document;
     RefreshOnActivate = true;
     SourceTable = "Sales Header";
@@ -92,6 +92,18 @@ page 50100 "Stationery Card"
                 group("Sell-to")
                 {
                     Caption = 'Sell-to';
+                    field("Cash Sale Cust. Name"; Rec."Cash Sale Cust. Name")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Name';
+                        ToolTip = 'Specifies the Name of the customer buying stationery';
+                    }
+                    field("Cash Sale Cust. Telephone No."; Rec."Cash Sale Cust. Telephone No.")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Telephone No.';
+                        ToolTip = 'Specifies the Telephone Number of the customer buying stationery';
+                    }
                     field("Sell-to Address"; Rec."Sell-to Address")
                     {
                         ApplicationArea = Basic, Suite;
