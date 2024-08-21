@@ -24,12 +24,12 @@ page 50104 "ASL.CashSaleSetup"
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Payment Method';
                 }
-                field("Bank/Cash Account No."; Rec."Bank/Cash Account No.")
+                field("Bank/Cash Account No."; Rec."Cash Account No.")
                 {
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Bank/Cash Account No.';
                 }
-                field("Bank/Cash Account Name"; Rec."Bank/Cash Account Name")
+                field("Bank/Cash Account Name"; Rec."Cash Account Name")
                 {
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Bank.Cash Account Name';

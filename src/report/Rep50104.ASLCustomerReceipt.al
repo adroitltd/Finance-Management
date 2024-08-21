@@ -32,7 +32,13 @@ report 50104 "ASL.CustomerReceipt"
             column(CompanyTIN; CompanyInfo."TIN NO.")
             {
             }
-            column(Cash_Sale_Cust__Name;"Cash Sale Cust. Name")
+            column(Cash_Sale_Cust__Name; "Cash Sale Cust. Name")
+            {
+            }
+            column(Cash_Sale_Cust__Telephone_No_; "Cash Sale Cust. Telephone No.")
+            {
+            }
+            column(Cash_Sale_Receipt_No_; "Cash Sale Receipt No.")
             {
             }
             column(JournalTemplateName; "Journal Template Name")

@@ -1,7 +1,7 @@
 namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Sales.Document;
-using Microsoft.Bank.BankAccount;
+using Microsoft.Finance.GeneralLedger.Account;
 using System.Security.User;
 
 tableextension 50103 "ASL.SalesHeader" extends "Sales Header"
@@ -17,7 +17,7 @@ tableextension 50103 "ASL.SalesHeader" extends "Sales Header"
         field(50101; "ASL.CashPaymentAccountNo"; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Bank Account"."No.";
+            TableRelation = "G/L Account"."No.";
         }
         field(50102; "ASL.Payment Method"; Code[20])
         {

@@ -398,7 +398,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Customer No: </Value>
+                    <Value>Telephone No: </Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -453,7 +453,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=First(Fields!DocumentNo.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!Cash_Sale_Receipt_No_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -986,6 +986,12 @@ End Function
         </Field>
         <Field Name="Cash_Sale_Cust__Name">
           <DataField>Cash_Sale_Cust__Name</DataField>
+        </Field>
+        <Field Name="Cash_Sale_Cust__Telephone_No_">
+          <DataField>Cash_Sale_Cust__Telephone_No_</DataField>
+        </Field>
+        <Field Name="Cash_Sale_Receipt_No_">
+          <DataField>Cash_Sale_Receipt_No_</DataField>
         </Field>
         <Field Name="JournalTemplateName">
           <DataField>JournalTemplateName</DataField>

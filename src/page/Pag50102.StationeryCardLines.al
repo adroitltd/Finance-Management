@@ -1230,8 +1230,6 @@ page 50102 "Stationery Card Lines"
 
         RecRef.GetTable(Rec);
         TypeAsText := TempOptionLookupBuffer.FormatOption(RecRef.Field(Rec.FieldNo(Type)));
-        // Default quantity to 1
-        Rec.Quantity := 1;
     end;
 
     local procedure SetItemChargeFieldsStyle()

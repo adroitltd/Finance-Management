@@ -15,24 +15,24 @@ table 50100 "ASL.CashSaleSetup"
             DataClassification = CustomerContent;
             TableRelation = "ASL.PaymentMethod".Code;
         }
-        field(50102; "Bank/Cash Account No."; Code[20])
+        field(50102; "Cash Account No."; Code[20])
         {
             DataClassification = CustomerContent;
-            TableRelation = "Bank Account"."No.";
+            TableRelation = "G/L Account"."No.";
 
             trigger OnValidate()
             var
-                BankAccount: Record "Bank Account";
+                GeneralLedgerAccount: Record "G/L Account";
                 POSSetup: Record "Sales & Receivables Setup";
             begin
-                if ("Bank/Cash Account No." <> '') then begin
-                    BankAccount.Get("Bank/Cash Account No.");
-                    "Bank/Cash Account Name" := BankAccount.Name;
+                if ("Cash Account No." <> '') then begin
+                    GeneralLedgerAccount.Get("Cash Account No.");
+                    "Cash Account Name" := GeneralLedgerAccount.Name;
                 end else
-                    "Bank/Cash Account Name" := '';
+                    "Cash Account Name" := '';
             end;
         }
-        field(50103; "Bank/Cash Account Name"; Text[100])
+        field(50103; "Cash Account Name"; Text[100])
         {
             DataClassification = CustomerContent;
             Editable = false;

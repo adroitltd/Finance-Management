@@ -34,6 +34,8 @@ codeunit 50100 "Finance Management"
                 if SalesLines."Location Code" = '' then begin
                     SalesHeader.TestField("ASL.Payment Method");
                     SalesHeader.TestField("ASL.CashPaymentAccountNo");
+                    SalesHeader.TestField("Cash Sale Cust. Name");
+                    SalesHeader.TestField("Cash Sale Cust. Telephone No.");
                     SalesLines.TestField("Location Code");
                 end;
             until SalesLines.Next() = 0;
@@ -62,9 +64,11 @@ codeunit 50100 "Finance Management"
         // post and apply payment
         GetSalesSetup();
         SalesSetup.TestField("Invoice Nos.");
+        SalesSetup.TestField("Cash Sale Receipt Nos.");
         PostCashSaleReceiptJournalLine(
             SalesInvHeader,
             NoSeriesMgmt.GetNextNo(SalesSetup."Invoice Nos.", SalesInvHeader."Posting Date", true),
+            NoSeriesMgmt.GetNextNo(SalesSetup."Cash Sale Receipt Nos.", SalesInvHeader."Posting Date", true),
             SalesInvHeader."ASL.CashPaymentAccountNo"
         );
     end;
@@ -72,7 +76,8 @@ codeunit 50100 "Finance Management"
     local procedure PostCashSaleReceiptJournalLine(
         var SalesInvHeader: Record "Sales Invoice Header";
         PaymentDocumentNo: Code[20];
-        PayFromBankAccNo: Code[20]
+        ReceiptNo: Code[20];
+        PayToAccNo: Code[20]
     )
     var
         GenJnlLine: Record "Gen. Journal Line";
@@ -95,14 +100,15 @@ codeunit 50100 "Finance Management"
             SalesInvHeader."Posting Date",
             "Gen. Journal Document Type"::Payment,
             PaymentDocumentNo,
+            ReceiptNo,
             "Gen. Journal Account Type"::Customer,
             SalesInvHeader."Bill-to Customer No.",
             SalesInvHeader."Cash Sale Cust. Name",
             SalesInvHeader."Cash Sale Cust. Telephone No.",
             0,
             SalesInvHeader."Amount Including VAT",
-            "Gen. Journal Account Type"::"Bank Account",
-            PayFromBankAccNo,
+            "Gen. Journal Account Type"::"G/L Account",
+            PayToAccNo,
             true,
             "Gen. Journal Document Type"::Invoice,
             SalesInvHeader."No.",
@@ -118,6 +124,7 @@ codeunit 50100 "Finance Management"
         PostingDate: Date;
         DocType: Enum "Gen. Journal Document Type";
         DocNo: Code[20];
+        CashSaleReceiptNo: Code[20];
         AccountType: Enum "Gen. Journal Account Type";
         AccountNo: Code[20];
         CustomerName: Text[100];
@@ -140,13 +147,13 @@ codeunit 50100 "Finance Management"
         GenJournalLine.Init();
         GenJournalLine."Journal Template Name" := TemplateName;
         GenJournalLine."Journal Batch Name" := BatchName;
-        // GenJournalLine."Cash Sale Receipt No." := 
         GenJournalLine."Line No." := LineNo;
         GenJournalLine."Source Code" := SalesSetup."ASL.CashSalesSourceCode";
         GenJournalLine."Currency Code" := GenLedgerSetup."LCY Code";
         GenJournalLine.Validate("Posting Date", PostingDate);
         GenJournalLine.Validate("Document Type", DocType);
         GenJournalLine.Validate("Document No.", DocNo);
+        GenJournalLine.Validate("Cash Sale Receipt No.", CashSaleReceiptNo);
         GenJournalLine.Validate("Account Type", AccountType);
         GenJournalLine.Validate("Account No.", AccountNo);
         GenJournalLine.Validate("Cash Sale Cust. Name", CustomerName);
