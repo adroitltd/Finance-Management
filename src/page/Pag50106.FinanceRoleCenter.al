@@ -188,6 +188,13 @@ page 50106 "Finance Role Center"
         }
         area(Creation)
         {
+            action("Purchase Order")
+            {
+                ApplicationArea = All;
+                Image = Purchase;
+                RunObject = page "Purchase Order";
+                RunPageMode = Create;
+            }
             action("Sales Order")
             {
                 ApplicationArea = All;
