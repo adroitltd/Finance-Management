@@ -56,7 +56,7 @@ page 50106 "Finance Role Center"
                 action("Purchase Orders")
                 {
                     ApplicationArea = All;
-                    RunObject = page "Purchase Orders";
+                    RunObject = page "Purchase Order List";
                     RunPageMode = View;
                 }
                 action("Purchase Invoices")
@@ -83,7 +83,7 @@ page 50106 "Finance Role Center"
                 action(Customers)
                 {
                     ApplicationArea = All;
-                    RunObject = page "Customer Link";
+                    RunObject = page "Customer List";
                     RunPageMode = View;
                 }
                 action("Stationery Sales")
@@ -95,7 +95,7 @@ page 50106 "Finance Role Center"
                 action("Sales Orders")
                 {
                     ApplicationArea = All;
-                    RunObject = page "Sales Orders";
+                    RunObject = page "Sales Order List";
                     RunPageMode = View;
                 }
                 action("Sales Invoices")
