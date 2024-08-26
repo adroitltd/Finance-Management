@@ -2,7 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Sales.Setup;
 
-pageextension 50112 "ASL.Sales&ReceivablesSetup" extends "Sales & Receivables Setup"
+pageextension 50111 "ASL.Sales&ReceivablesSetup" extends "Sales & Receivables Setup"
 {
     layout
     {

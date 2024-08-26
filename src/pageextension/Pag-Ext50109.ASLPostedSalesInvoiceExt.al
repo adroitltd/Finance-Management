@@ -2,7 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Sales.History;
 
-pageextension 50110 "ASL.PostedSalesInvoiceExt" extends "Posted Sales Invoice"
+pageextension 50109 "ASL.PostedSalesInvoiceExt" extends "Posted Sales Invoice"
 {
     layout
     {
