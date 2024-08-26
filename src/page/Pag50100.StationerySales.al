@@ -106,14 +106,6 @@ page 50100 "Stationery Sales"
                         Caption = 'Telephone No.';
                         ToolTip = 'Specifies the Telephone Number of the customer buying stationery';
                     }
-                    field("Sell-to Address"; Rec."Sell-to Address")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Address';
-                        Importance = Additional;
-                        QuickEntry = false;
-                        ToolTip = 'Specifies the address where the customer is located.';
-                    }
                 }
                 field("Document Date"; Rec."Document Date")
                 {
@@ -147,21 +139,17 @@ page 50100 "Stationery Sales"
                     AboutTitle = 'When is payment due?';
                     AboutText = 'When you post an order, the invoice gets it''s due date. You can set default due dates for orders by assigning payment terms to customers.';
                 }
-                group("Work Description")
+                group("Cash Sale Narration")
                 {
-                    Caption = 'Work Description';
-                    field(WorkDescription; WorkDescription)
+                    Caption = 'Narration';
+                    field(Narration; Rec.Narration)
                     {
                         ApplicationArea = Basic, Suite;
                         Importance = Additional;
                         MultiLine = true;
                         ShowCaption = false;
+                        ShowMandatory = true;
                         ToolTip = 'Specifies the products or service being offered.';
-
-                        trigger OnValidate()
-                        begin
-                            Rec.SetWorkDescription(WorkDescription);
-                        end;
                     }
                 }
                 field(Seller; Rec.Seller)
@@ -174,12 +162,14 @@ page 50100 "Stationery Sales"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Payment Method';
                     Editable = false;
+                    Visible = false;
                 }
                 field("ASL.CashPaymentAccountNo"; Rec."ASL.CashPaymentAccountNo")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Payment Account No.';
                     Editable = false;
+                    Visible = false;
                 }
             }
             part(StationeryLines; "Stationery Card Lines")
@@ -294,7 +284,6 @@ page 50100 "Stationery Sales"
 
     trigger OnAfterGetRecord()
     begin
-        WorkDescription := Rec.GetWorkDescription();
         if GuiAllowed() then begin
             SetControlVisibility();
             UpdateShipToBillToGroupVisibility();
@@ -413,7 +402,6 @@ page 50100 "Stationery Sales"
         SureToRejectMsg: Label 'Rejecting this order will remove it from your company and send it back to the partner company.\\Do you want to continue?';
         IsCustomerOrContactNotEmpty: Boolean;
         SalesDocCheckFactboxVisible: Boolean;
-        WorkDescription: Text;
         StatusStyleTxt: Text;
         IsBillToCountyVisible: Boolean;
         IsSellToCountyVisible: Boolean;

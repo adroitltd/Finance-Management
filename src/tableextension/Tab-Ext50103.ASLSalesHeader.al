@@ -39,5 +39,10 @@ tableextension 50103 "ASL.SalesHeader" extends "Sales Header"
             Caption = 'Cash Sale Cust. Telephone No.';
             DataClassification = ToBeClassified;
         }
+        field(50106; Narration; Text[255])
+        {
+            Caption = 'Narration';
+            DataClassification = ToBeClassified;
+        }
     }
 }

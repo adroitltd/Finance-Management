@@ -21,5 +21,10 @@ tableextension 50106 "ASL.GenJournalLineExt" extends "Gen. Journal Line"
             Caption = 'Cash Sale Cust. Telephone No.';
             DataClassification = ToBeClassified;
         }
+        field(50103; Narration; Text[255])
+        {
+            Caption = 'Narration';
+            DataClassification = ToBeClassified;
+        }
     }
 }

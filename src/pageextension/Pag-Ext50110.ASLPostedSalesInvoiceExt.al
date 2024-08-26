@@ -28,5 +28,17 @@ pageextension 50110 "ASL.PostedSalesInvoiceExt" extends "Posted Sales Invoice"
                 Editable = false;
             }
         }
+        modify("Work Description")
+        {
+            Visible=false;
+        }
+        addafter("Work Description")
+        {
+            field(Narration;Rec.Narration)
+            {
+                ApplicationArea = Basic, Suite;
+                Editable = false;
+            }
+        }
     }
 }

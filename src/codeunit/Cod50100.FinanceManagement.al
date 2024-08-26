@@ -32,21 +32,20 @@ codeunit 50100 "Finance Management"
         if SalesLines.FindSet() then begin
             repeat
                 if SalesLines."Location Code" = '' then begin
-                    SalesHeader.TestField("ASL.Payment Method");
-                    SalesHeader.TestField("ASL.CashPaymentAccountNo");
-                    SalesHeader.TestField("Cash Sale Cust. Name");
-                    SalesHeader.TestField("Cash Sale Cust. Telephone No.");
                     SalesLines.TestField("Location Code");
                 end;
             until SalesLines.Next() = 0;
         end;
+        SalesHeader.TestField("ASL.Payment Method");
+        SalesHeader.TestField("ASL.CashPaymentAccountNo");
+        SalesHeader.TestField("Cash Sale Cust. Name");
+        SalesHeader.TestField(Narration);
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterPostSalesDoc', '', false, false)]
     local procedure OnAfterPostSalesDoc(var SalesHeader: Record "Sales Header"; var GenJnlPostLine: Codeunit "Gen. Jnl.-Post Line"; SalesShptHdrNo: Code[20]; RetRcpHdrNo: Code[20]; SalesInvHdrNo: Code[20]; SalesCrMemoHdrNo: Code[20]; CommitIsSuppressed: Boolean; InvtPickPutaway: Boolean; var CustLedgerEntry: Record "Cust. Ledger Entry"; WhseShip: Boolean; WhseReceiv: Boolean)
     var
         SalesInvHeader: Record "Sales Invoice Header";
-        CashSalesHeader: Record "Sales Header";
     begin
         SalesInvHeader.Get(SalesInvHdrNo);
         // Prevent this when a normal sales order is posted
@@ -105,6 +104,7 @@ codeunit 50100 "Finance Management"
             SalesInvHeader."Bill-to Customer No.",
             SalesInvHeader."Cash Sale Cust. Name",
             SalesInvHeader."Cash Sale Cust. Telephone No.",
+            SalesInvHeader.Narration,
             0,
             SalesInvHeader."Amount Including VAT",
             "Gen. Journal Account Type"::"G/L Account",
@@ -129,6 +129,7 @@ codeunit 50100 "Finance Management"
         AccountNo: Code[20];
         CustomerName: Text[100];
         CustomerTelephoneNo: Text[15];
+        CashSaleNarration: Text;
         DebitAmount: Decimal;
         CreditAmount: Decimal;
         BalAccountType: Enum "Gen. Journal Account Type";
@@ -158,6 +159,7 @@ codeunit 50100 "Finance Management"
         GenJournalLine.Validate("Account No.", AccountNo);
         GenJournalLine.Validate("Cash Sale Cust. Name", CustomerName);
         GenJournalLine.Validate("Cash Sale Cust. Telephone No.", CustomerTelephoneNo);
+        GenJournalLine.Validate(Narration, CashSaleNarration);
         if DebitAmount > 0 then
             GenJournalLine.Validate("Debit Amount", DebitAmount)
         else

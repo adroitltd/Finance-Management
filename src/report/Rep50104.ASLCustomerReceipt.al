@@ -41,6 +41,9 @@ report 50104 "ASL.CustomerReceipt"
             column(Cash_Sale_Receipt_No_; "Cash Sale Receipt No.")
             {
             }
+            column(Narration; Narration)
+            {
+            }
             column(JournalTemplateName; "Journal Template Name")
             {
             }
