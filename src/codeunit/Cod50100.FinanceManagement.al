@@ -13,6 +13,9 @@ codeunit 50100 "Finance Management"
 
         if ReportId = Report::"Standard Sales - Invoice" then
             NewReportId := Report::"Tax Invoice Report";
+
+        if ReportId = Report::"Vendor - Detail Trial Balance" then
+            NewReportId := Report::"Vendor Detail Trial Balance"    
     end;
 
     local procedure GetSalesSetup()

@@ -226,12 +226,13 @@ page 50106 "Finance Role Center"
             {
                 ApplicationArea = All;
                 Image = Report;
+                RunObject=report "Stationery Trial Balance";
             }
             action(" Vendors")
             {
                 ApplicationArea = All;
                 Image = Report;
-                RunObject = report "Vendor - Detail Trial Balance";
+                RunObject = report "Vendor Detail Trial Balance";
             }
             action("Income Statement")
             {
