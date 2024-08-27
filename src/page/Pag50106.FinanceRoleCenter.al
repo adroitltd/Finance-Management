@@ -1,18 +1,16 @@
 namespace FinanceManagement.FinanceManagement;
+
 using System.Visualization;
 using Microsoft.Purchases.Vendor;
 using Microsoft.Sales.RoleCenters;
-using Microsoft.Foundation.Task;
 using Microsoft.Finance.GeneralLedger.Reports;
 using Microsoft.FixedAssets.Reports;
 using Microsoft.Finance.FinancialReports;
-using Microsoft.Purchases.Reports;
 using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Sales.Customer;
 using Microsoft.Finance.GeneralLedger.Account;
 using Microsoft.Sales.History;
 using Microsoft.Sales.Document;
-using Microsoft.CRM.BusinessRelation;
 using Microsoft.Inventory.Location;
 using Microsoft.Inventory.Journal;
 using Microsoft.Inventory.Item;
@@ -212,49 +210,54 @@ page 50106 "Finance Role Center"
         }
         area(Reporting)
         {
-            action(Tenants)
+            group(Reports)
             {
-                ApplicationArea = All;
-                Image = Report;
-            }
-            action(Members)
-            {
-                ApplicationArea = All;
-                Image = Report;
-            }
-            action("Stationery ")
-            {
-                ApplicationArea = All;
-                Image = Report;
-                RunObject=report "Stationery Trial Balance";
-            }
-            action(" Vendors")
-            {
-                ApplicationArea = All;
-                Image = Report;
-                RunObject = report "Vendor Detail Trial Balance";
-            }
-            action("Income Statement")
-            {
-                ApplicationArea = All;
-                Image = Report;
-                RunObject = report "Income Statement";
-            }
-            action("Balance Sheet")
-            {
-                ApplicationArea = All;
-                Image = Report;
-                RunObject = report "Balance Sheet";
-            }
-            action("Fixed Assets")
-            {
-                ApplicationArea = All;
-                RunObject = report "Fixed Asset - List";
-            }
-            action("G/L Budget")
-            {
-                ApplicationArea = All;
-                RunObject = report Budget;
+                action(Tenants)
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Tenant Trial Balance";
+                }
+                action(Members)
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Members Detail Trial Balance";
+                }
+                action("Stationery ")
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Stationery Trial Balance";
+                }
+                action(" Vendors")
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Vendor Detail Trial Balance";
+                }
+                action("Income Statement")
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Income Statement";
+                }
+                action("Balance Sheet")
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Balance Sheet";
+                }
+                action("Fixed Assets")
+                {
+                    ApplicationArea = All;
+                    RunObject = report "Fixed Asset - List";
+                }
+                action("G/L Budget")
+                {
+                    ApplicationArea = All;
+                    RunObject = report Budget;
+                }
             }
         }
     }

@@ -6,11 +6,11 @@ using Microsoft.Sales.Receivables;
 using Microsoft.Utilities;
 using System.Utilities;
 
-report 50105 "Stationery Trial Balance"
+report 50106 "Tenant Trial Balance"
 {
-    Caption = 'Stationery - Detail Trial Balance';
+    Caption = 'Tenant - Detail Trial Balance';
     DefaultLayout = RDLC;
-    RDLCLayout = './xLayout/StationeryDetailTrialBal.rdl';
+    RDLCLayout = './xLayout/TenantDetailTrialBal.rdl';
     ApplicationArea = Basic, Suite;
     UsageCategory = ReportsAndAnalysis;
 
@@ -77,7 +77,7 @@ report 50105 "Stationery Trial Balance"
             {
                 AutoFormatType = 1;
             }
-            column(StationeryDetailTrialBalCaption; StationeryDetailTrialBalCaptionLbl)
+            column(TenantDetailTrialBalCaption; TenantDetailTrialBalCaptionLbl)
             {
             }
             column(PageNoCaption; PageNoCaptionLbl)
@@ -261,8 +261,8 @@ report 50105 "Stationery Trial Balance"
             begin
                 PageGroupNo := 1;
                 Clear(StartBalanceLCY);
-                // Get report for only Stationery Customers
-                SetFilter("Customer Posting Group", 'STA*');
+                // Get report for only Tenants
+                SetFilter("Customer Posting Group", 'TEN*');
             end;
         }
     }
@@ -287,15 +287,15 @@ report 50105 "Stationery Trial Balance"
                     field(NewPageperCustomer; PrintOnlyOnePerPage)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'New Page per Customer';
-                        ToolTip = 'Specifies if each customer''s information is printed on a new page if you have chosen two or more customers to be included in the report.';
+                        Caption = 'New Page per Tenant';
+                        ToolTip = 'Specifies if each Tenant''s information is printed on a new page if you have chosen two or more Tenants to be included in the report.';
                     }
                     // field(ExcludeCustHaveaBalanceOnly; ExcludeBalanceOnly)
                     // {
                     //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Exclude Customers That Have a Balance Only';
+                    //     Caption = 'Exclude Tenants That Have a Balance Only';
                     //     MultiLine = true;
-                    //     ToolTip = 'Specifies if you do not want the report to include entries for customers that have a balance but do not have a net change during the selected time period.';
+                    //     ToolTip = 'Specifies if you do not want the report to include entries for Tenants that have a balance but do not have a net change during the selected time period.';
                     // }
                 }
             }
@@ -350,10 +350,10 @@ report 50105 "Stationery Trial Balance"
         PageGroupNo: Integer;
 
         Text000: Label 'Period: %1';
-        StationeryDetailTrialBalCaptionLbl: Label 'Stationery - Detail Trial Balance';
+        TenantDetailTrialBalCaptionLbl: Label 'Tenant - Detail Trial Balance';
         PageNoCaptionLbl: Label 'Page';
         AllAmtsLCYCaptionLbl: Label 'All amounts are in LCY';
-        RepInclCustsBalCptnLbl: Label 'This report also includes customers that only have balances.';
+        RepInclCustsBalCptnLbl: Label 'This report also includes Tenants that only have balances.';
         PostingDateCaptionLbl: Label 'Posting Date';
         DueDateCaptionLbl: Label 'Due Date';
         BalanceLCYCaptionLbl: Label 'Balance (LCY)';
