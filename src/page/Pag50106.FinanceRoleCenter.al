@@ -9,6 +9,8 @@ using Microsoft.Finance.FinancialReports;
 using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Sales.Customer;
 using Microsoft.Finance.GeneralLedger.Account;
+using Microsoft.Finance.GeneralLedger.Budget;
+using Microsoft.Finance.Analysis;
 using Microsoft.Sales.History;
 using Microsoft.Sales.Document;
 using Microsoft.Inventory.Location;
@@ -143,6 +145,12 @@ page 50106 "Finance Role Center"
             {
                 ApplicationArea = All;
                 RunObject = page "Chart of Accounts";
+                RunPageMode = View;
+            }
+            action(Budgets)
+            {
+                ApplicationArea = All;
+                RunObject = page "G/L Budget Names";
                 RunPageMode = View;
             }
             action(Customer)
