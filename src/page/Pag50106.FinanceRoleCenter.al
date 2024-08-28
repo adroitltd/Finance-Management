@@ -9,6 +9,8 @@ using Microsoft.Finance.FinancialReports;
 using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Sales.Customer;
 using Microsoft.Finance.GeneralLedger.Account;
+using System.Automation;
+using Microsoft.FixedAssets.FixedAsset;
 using Microsoft.Finance.GeneralLedger.Budget;
 using Microsoft.Finance.Analysis;
 using Microsoft.Sales.History;
@@ -36,6 +38,10 @@ page 50106 "Finance Role Center"
             part(Control1901851508; "SO Processor Activities")
             {
                 AccessByPermission = TableData "Sales Shipment Header" = R;
+                ApplicationArea = Basic, Suite;
+            }
+            part(ApprovalsActivities; "Approvals Activities")
+            {
                 ApplicationArea = Basic, Suite;
             }
         }
@@ -135,7 +141,6 @@ page 50106 "Finance Role Center"
                 {
                     ApplicationArea = All;
                     RunObject = page "Location List";
-                    RunPageMode = View;
                 }
             }
         }
@@ -145,27 +150,28 @@ page 50106 "Finance Role Center"
             {
                 ApplicationArea = All;
                 RunObject = page "Chart of Accounts";
-                RunPageMode = View;
+            }
+            action("Fixed Assets ")
+            {
+                ApplicationArea = All;
+                RunObject=page "Fixed Asset List";
             }
             action(Budgets)
             {
                 ApplicationArea = All;
                 RunObject = page "G/L Budget Names";
-                RunPageMode = View;
             }
             action(Customer)
             {
                 ApplicationArea = All;
                 Caption = 'Customers';
                 RunObject = page "Customer List";
-                RunPageMode = View;
             }
             action(Vendor)
             {
                 ApplicationArea = All;
                 Caption = 'Vendors';
                 RunObject = page "Vendor List";
-                RunPageMode = View;
             }
             action("General Journals")
             {
@@ -215,6 +221,13 @@ page 50106 "Finance Role Center"
                 RunObject = page "Stationery Sales";
                 RunPageMode = Create;
             }
+            action("Fixed Asset")
+            {
+                ApplicationArea = All;
+                Image = FixedAssets;
+                RunObject = page "Fixed Asset Card";
+                RunPageMode = Create;
+            }
         }
         area(Reporting)
         {
@@ -248,25 +261,25 @@ page 50106 "Finance Role Center"
                 {
                     ApplicationArea = All;
                     Image = Report;
-                    // RunObject = report "Income Statement";
+                    RunObject = report "Income Statement Report";
                 }
                 action("Balance Sheet")
                 {
                     ApplicationArea = All;
                     Image = Report;
-                    // RunObject = report "Balance Sheet";
+                    RunObject = report "Balance Sheet Report";
                 }
                 action("Fixed Assets")
                 {
                     ApplicationArea = All;
                     Image=Report;
-                    RunObject = report "Fixed Asset - List";
+                    RunObject = report "Fixed Asset - Details";
                 }
                 action("G/L Budget")
                 {
                     ApplicationArea = All;
                     Image=Report;
-                    // RunObject = report Budget;
+                    RunObject = report "Trial Balance/Budget";
                 }
             }
         }
