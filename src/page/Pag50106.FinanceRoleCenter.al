@@ -240,23 +240,25 @@ page 50106 "Finance Role Center"
                 {
                     ApplicationArea = All;
                     Image = Report;
-                    RunObject = report "Income Statement";
+                    // RunObject = report "Income Statement";
                 }
                 action("Balance Sheet")
                 {
                     ApplicationArea = All;
                     Image = Report;
-                    RunObject = report "Balance Sheet";
+                    // RunObject = report "Balance Sheet";
                 }
                 action("Fixed Assets")
                 {
                     ApplicationArea = All;
+                    Image=Report;
                     RunObject = report "Fixed Asset - List";
                 }
                 action("G/L Budget")
                 {
                     ApplicationArea = All;
-                    RunObject = report Budget;
+                    Image=Report;
+                    // RunObject = report Budget;
                 }
             }
         }

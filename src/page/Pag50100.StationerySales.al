@@ -156,6 +156,7 @@ page 50100 "Stationery Sales"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
+                    Visible=false;
                 }
                 field("Payment Method"; Rec."ASL.Payment Method")
                 {
