@@ -20,6 +20,7 @@ report 50105 "Stationery Trial Balance"
         {
             DataItemTableView = sorting("No.");
             PrintOnlyIfDetail = true;
+            RequestFilterFields = "No.", Name, "Date Filter";
             column(TodayFormatted; Format(Today))
             {
             }

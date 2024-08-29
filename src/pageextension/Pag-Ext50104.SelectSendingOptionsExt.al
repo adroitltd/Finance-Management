@@ -2,7 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Foundation.Reporting;
 
-pageextension 50104 "Select Sending Options Ext" extends "Select Sending Options"
+pageextension 50103 "Select Sending Options Ext" extends "Select Sending Options"
 {
     Caption = 'Send LPO to Vendor/Supplier Email';
 

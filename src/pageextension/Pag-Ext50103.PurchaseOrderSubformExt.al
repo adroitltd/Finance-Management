@@ -2,7 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Purchases.Document;
 
-pageextension 50103 "Purchase Order Subform Ext" extends "Purchase Order Subform"
+pageextension 50102 "Purchase Order Subform Ext" extends "Purchase Order Subform"
 {
     layout
     {

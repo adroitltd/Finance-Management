@@ -2,7 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Inventory.Item;
 
-pageextension 50108 "Item List Ext" extends "Item List"
+pageextension 50107 "Item List Ext" extends "Item List"
 {
     Caption = 'Stationery List';
     AdditionalSearchTerms = 'St, Sta, Stat, Stationery';

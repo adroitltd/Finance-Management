@@ -2,7 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Sales.Customer;
 
-pageextension 50106 "Customer Card Ext" extends "Customer Card"
+pageextension 50105 "Customer Card Ext" extends "Customer Card"
 {
     layout
     {

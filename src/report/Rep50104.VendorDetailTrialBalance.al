@@ -19,7 +19,7 @@ report 50104 "Vendor Detail Trial Balance"
         {
             DataItemTableView = sorting("No.");
             PrintOnlyIfDetail = true;
-            RequestFilterFields = "No.","Vendor Posting Group", "Date Filter";
+            RequestFilterFields = "No.", Name, "Vendor Posting Group", "Date Filter";
             column(VendDatetFilterPeriod; StrSubstNo(Text000, VendDateFilter))
             {
             }

@@ -12,10 +12,7 @@ codeunit 50100 "Finance Management"
             NewReportId := Report::"LPO Report";
 
         if ReportId = Report::"Standard Sales - Invoice" then
-            NewReportId := Report::"Tax Invoice Report";
-
-        if ReportId = Report::"Vendor - Detail Trial Balance" then
-            NewReportId := Report::"Vendor Detail Trial Balance"    
+            NewReportId := Report::"Tax Invoice Report";  
     end;
 
     local procedure GetSalesSetup()
@@ -39,21 +36,20 @@ codeunit 50100 "Finance Management"
                 end;
             until SalesLines.Next() = 0;
         end;
-        SalesHeader.TestField("ASL.Payment Method");
-        SalesHeader.TestField("ASL.CashPaymentAccountNo");
-        SalesHeader.TestField("Cash Sale Cust. Name");
-        SalesHeader.TestField(Narration);
+        // SalesHeader.TestField("ASL.Payment Method");
+        // SalesHeader.TestField("ASL.CashPaymentAccountNo");
+        // SalesHeader.TestField("Cash Sale Cust. Name");
+        // SalesHeader.TestField(Narration);
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnAfterPostSalesDoc', '', false, false)]
     local procedure OnAfterPostSalesDoc(var SalesHeader: Record "Sales Header"; var GenJnlPostLine: Codeunit "Gen. Jnl.-Post Line"; SalesShptHdrNo: Code[20]; RetRcpHdrNo: Code[20]; SalesInvHdrNo: Code[20]; SalesCrMemoHdrNo: Code[20]; CommitIsSuppressed: Boolean; InvtPickPutaway: Boolean; var CustLedgerEntry: Record "Cust. Ledger Entry"; WhseShip: Boolean; WhseReceiv: Boolean)
     var
         SalesInvHeader: Record "Sales Invoice Header";
-    begin
+    begin 
         SalesInvHeader.Get(SalesInvHdrNo);
         // Prevent this when a normal sales order is posted
-        if SalesInvHeader."ASL.CashPaymentAccountNo" = '' then
-            exit;
+        if SalesInvHeader."ASL.CashPaymentAccountNo" = '' then exit;
         // check for invoice posted from cash sale
         if SalesInvHeader."No." <> '' then begin
             SalesInvHeader.Get(SalesInvHeader."No.");
@@ -163,11 +159,10 @@ codeunit 50100 "Finance Management"
         GenJournalLine.Validate("Cash Sale Cust. Name", CustomerName);
         GenJournalLine.Validate("Cash Sale Cust. Telephone No.", CustomerTelephoneNo);
         GenJournalLine.Validate(Narration, CashSaleNarration);
-        if DebitAmount > 0 then
+        if DebitAmount > 0 then 
             GenJournalLine.Validate("Debit Amount", DebitAmount)
         else
-            if CreditAmount > 0 then
-                GenJournalLine.Validate("Credit Amount", CreditAmount);
+            if CreditAmount > 0 then GenJournalLine.Validate("Credit Amount", CreditAmount);
 
         if BalAccountNo <> '' then begin
             GenJournalLine.Validate(GenJournalLine."Bal. Account Type", BalAccountType);
@@ -218,9 +213,13 @@ codeunit 50100 "Finance Management"
         GenJnlLineFilter.SetRange("Account Type", GenJournalLine."Account Type"::Customer);
         if GenJnlLineFilter.FindSet() then begin
             repeat begin
+                // Prevent printing of receipt for non cash sales in Cash Receipt Journals
+                if GenJnlLineFilter."Cash Sale Receipt No." = '' then exit;
+                if GenJnlLineFilter."Cash Sale Cust. Name" = '' then exit;
+                if GenJnlLineFilter.Narration = '' then exit;
                 RecRef.GetTable(GenJnlLineFilter);
                 TempBlob.CreateOutStream(OutStream);
-                Report.SaveAs(50104, '', ReportFormat::Pdf, OutStream, RecRef);
+                Report.SaveAs(50103, '', ReportFormat::Pdf, OutStream, RecRef);
                 TempBlob.CreateInStream(InStream);
                 FileName := 'CustomerReceipt.pdf';
                 DownloadFromStream(InStream, 'Printing Customer Receipt', '', '', FileName);

@@ -9,6 +9,7 @@ using Microsoft.Finance.FinancialReports;
 using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Sales.Customer;
 using Microsoft.Finance.GeneralLedger.Account;
+using Microsoft.Bank.BankAccount;
 using System.Automation;
 using Microsoft.FixedAssets.FixedAsset;
 using Microsoft.Finance.GeneralLedger.Budget;
@@ -160,6 +161,11 @@ page 50106 "Finance Role Center"
             {
                 ApplicationArea = All;
                 RunObject = page "G/L Budget Names";
+            }
+            action("Stationery List")
+            {
+                ApplicationArea = All;
+                RunObject=page "Item List";
             }
             action(Customer)
             {

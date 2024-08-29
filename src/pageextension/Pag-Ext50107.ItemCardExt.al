@@ -2,7 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Inventory.Item;
 
-pageextension 50107 "Item Card Ext" extends "Item Card"
+pageextension 50106 "Item Card Ext" extends "Item Card"
 {
     Caption = 'Stationery Card';
     layout
