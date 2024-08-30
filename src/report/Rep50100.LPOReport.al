@@ -56,7 +56,7 @@ report 50100 "LPO Report"
             column(CompanyPhoneNo_Lbl; CompanyInfoPhoneNoCaptionLbl)
             {
             }
-            column(CompanyGiroNo; CompanyInfo."Giro No.")
+            column(CompanyGiroNo; CompanyInfo."TIN NO.")
             {
             }
             column(CompanyGiroNo_Lbl; CompanyInfoGiroNoCaptionLbl)
@@ -671,7 +671,7 @@ report 50100 "LPO Report"
                 column(TotalText; TotalText)
                 {
                 }
-                column(AmountInWords; AmountInWords[1])
+                column(AmountInWords; NoText[1])
                 {
                 }
 
@@ -706,8 +706,8 @@ report 50100 "LPO Report"
                     PrepmtVATAmount := TempPrepmtVATAmountLine.GetTotalVATAmount();
                     PrepmtVATBaseAmount := TempPrepmtVATAmountLine.GetTotalVATBase();
                     PrepmtTotalAmountInclVAT := TempPrepmtVATAmountLine.GetTotalAmountInclVAT();
-                    Check.InitTextVariable();
-                    Check.FormatNoText(AmountInWords, Round(TotalAmount, 0.01), "Purchase Header"."Currency Code");
+                    WriteAmountInWords.InitTextVariable();
+                    WriteAmountInWords.FormatNoText(NoText, TotalAmountInclVAT, "Purchase Header"."Currency Code");
                 end;
             }
             dataitem(VATCounter; "Integer")
@@ -997,8 +997,8 @@ report 50100 "LPO Report"
     var
         ApprovalEntry: Record "Approval Entry";
         Sender, Approver : Code[200];
-        Check: Report Check;
-        AmountInWords: array[1] of Text;
+        NoText: array[1] of Text;
+        WriteAmountInWords: Codeunit "ASL.WriteAmountInWords";
         GLSetup: Record "General Ledger Setup";
         TempPurchLine: Record "Purchase Line" temporary;
         CurrExchRate: Record "Currency Exchange Rate";

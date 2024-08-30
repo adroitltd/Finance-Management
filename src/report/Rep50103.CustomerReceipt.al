@@ -561,7 +561,7 @@ report 50103 "Customer Receipt"
             trigger OnAfterGetRecord()
             begin
                 WriteAmountInWords.InitTextVariable();
-                WriteAmountInWords.FormatNoText(NoText, "Credit Amount", '');
+                WriteAmountInWords.FormatNoText(NoText, "Credit Amount", GenJournalLine."Currency Code");
             end;
         }
     }

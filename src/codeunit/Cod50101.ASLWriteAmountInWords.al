@@ -48,7 +48,7 @@ codeunit 50101 "ASL.WriteAmountInWords"
         AddToNoText(NoText, NoTextIndex, PrintExponent, Text028);
         DecimalPosition := GetAmtDecimalPosition(CurrencyCode);
 
-        AddToNoText(NoText, NoTextIndex, PrintExponent, (Format(No * DecimalPosition) + '/' + Format(DecimalPosition)) +' SHILLINGS');
+        AddToNoText(NoText, NoTextIndex, PrintExponent, (Format(No * DecimalPosition) + '/' + Format(DecimalPosition)) +CurrencyCode);
 
         if CurrencyCode <> '' then
             AddToNoText(NoText, NoTextIndex, PrintExponent, CurrencyCode);
