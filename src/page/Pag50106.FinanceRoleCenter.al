@@ -14,6 +14,9 @@ using System.Automation;
 using Microsoft.FixedAssets.FixedAsset;
 using Microsoft.Finance.GeneralLedger.Budget;
 using Microsoft.Finance.Analysis;
+using Microsoft.Sales.Reports;
+using Microsoft.Purchases.Reports;
+using Microsoft.Inventory.Reports;
 using Microsoft.Sales.History;
 using Microsoft.Sales.Document;
 using Microsoft.Inventory.Location;
@@ -257,11 +260,41 @@ page 50106 "Finance Role Center"
                     Image = Report;
                     RunObject = report "Stationery Trial Balance";
                 }
+                action("Stationery Cost & Price")
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Inventory Cost and Price List";
+                }
+                action("All Customers Balance to Date")
+                {
+                    ApplicationArea = All;
+                    Image=Report;
+                    RunObject=report "Customer - Balance to Date";
+                }
+                action("Members Balance to Date")
+                {
+                    ApplicationArea = All;
+                    Image=Report;
+                    RunObject=report "Member Balance to Date";
+                }
+                action("Tenants Balance to Date")
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Tenant Balance to Date";
+                }
                 action(" Vendors")
                 {
                     ApplicationArea = All;
                     Image = Report;
                     RunObject = report "Vendor Detail Trial Balance";
+                }
+                action("Vendor Balance to Date")
+                {
+                    ApplicationArea = All;
+                    Image=Report;
+                    RunObject=report "Vendor - Balance to Date";
                 }
                 action("Income Statement")
                 {
