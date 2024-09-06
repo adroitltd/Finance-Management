@@ -8,7 +8,7 @@ codeunit 50100 "Finance Management"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::ReportManagement, 'OnAfterSubstituteReport', '', false, false)]
     local procedure OnAfterSubstituteLPOReport(ReportId: Integer; var NewReportId: Integer)
     begin
-        if ReportId = Report::Order then
+        if ReportId = Report::"Standard Purchase - Order" then
             NewReportId := Report::"LPO Report";
 
         if ReportId = Report::"Standard Sales - Invoice" then

@@ -455,14 +455,14 @@ report 50100 "LPO Report"
             column(Approver; Approver)
             {
             }
+            column(Currency_Code; CurrencyCode)
+            {
+            }
             dataitem("Purchase Line"; "Purchase Line")
             {
                 DataItemLink = "Document Type" = field("Document Type"), "Document No." = field("No.");
                 DataItemTableView = sorting("Document Type", "Document No.", "Line No.");
                 column(LineNo_PurchLine; "Line No.")
-                {
-                }
-                column(Currency_Code; "Currency Code")
                 {
                 }
                 column(AllowInvDisctxt; AllowInvDisctxt)
@@ -707,7 +707,7 @@ report 50100 "LPO Report"
                     PrepmtVATBaseAmount := TempPrepmtVATAmountLine.GetTotalVATBase();
                     PrepmtTotalAmountInclVAT := TempPrepmtVATAmountLine.GetTotalAmountInclVAT();
                     WriteAmountInWords.InitTextVariable();
-                    WriteAmountInWords.FormatNoText(NoText, TotalAmountInclVAT, "Purchase Header"."Currency Code");
+                    WriteAmountInWords.FormatNoText(NoText, TotalAmountInclVAT, '');
                 end;
             }
             dataitem(VATCounter; "Integer")
@@ -804,6 +804,11 @@ report 50100 "LPO Report"
 
                     CurrExchRate.FindCurrency("Purchase Header"."Posting Date", "Purchase Header"."Currency Code", 1);
                     VALExchRate := StrSubstNo(ExchangeRateLbl, CurrExchRate."Relational Exch. Rate Amount", CurrExchRate."Exchange Rate Amount");
+
+                    if "Purchase Header"."Currency Code" = '' then
+                        CurrencyCode:= GLSetup."LCY Code"
+                    else
+                        CurrencyCode:="Purchase Header"."Currency Code";    
                 end;
             }
             dataitem(PrepmtLoop; "Integer")
@@ -1134,6 +1139,7 @@ report 50100 "LPO Report"
         TotalInclVATText: Text[50];
         TotalExclVATText: Text[50];
         TotalSubTotal, TotalAmount, TotalInvoiceDiscountAmount : Decimal;
+        CurrencyCode: Text[50];
 
     protected procedure IsReportInPreviewMode(): Boolean
     var
