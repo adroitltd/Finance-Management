@@ -1,6 +1,7 @@
 namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.HumanResources.Employee;
 
 tableextension 50106 "ASL.GenJournalLineExt" extends "Gen. Journal Line"
 {
@@ -25,6 +26,12 @@ tableextension 50106 "ASL.GenJournalLineExt" extends "Gen. Journal Line"
         {
             Caption = 'Narration';
             DataClassification = ToBeClassified;
+        }
+        field(50104; "Employee Posting Group"; Code[20])
+        {
+            Caption = 'Employee Posting Group';
+            DataClassification = ToBeClassified;
+            TableRelation = "Employee Posting Group".Code;
         }
     }
 }
