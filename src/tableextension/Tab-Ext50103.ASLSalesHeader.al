@@ -2,12 +2,29 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Sales.Document;
 using Microsoft.Finance.GeneralLedger.Account;
+using Microsoft.Sales.Customer;
 using System.Security.User;
 
 tableextension 50103 "ASL.SalesHeader" extends "Sales Header"
 {
     fields
     {
+        modify("Sell-to Customer No.")
+        {
+            trigger OnAfterValidate()
+            var
+                Customer: Record Customer;
+            begin
+                Customer.Reset();
+                Customer.SetRange("No.", Rec."Sell-to Customer No.");
+                if Customer.FindSet() then begin
+                    repeat begin
+                        Rec."TIN No." := Customer.TIN;
+                        Rec.Modify();
+                    end until Customer.Next()=0;
+                end;
+            end;
+        }
         field(50100; "Seller"; Code[20])
         {
             DataClassification = CustomerContent;
@@ -43,6 +60,12 @@ tableextension 50103 "ASL.SalesHeader" extends "Sales Header"
         {
             Caption = 'Narration';
             DataClassification = ToBeClassified;
+        }
+        field(50107; "TIN No."; Text[255])
+        {
+            Caption = 'TIN No.';
+            DataClassification = ToBeClassified;
+            Editable=false;
         }
     }
 }

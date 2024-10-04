@@ -350,6 +350,10 @@ report 50101 "Tax Invoice Report"
             column(LegalEntityType_Lbl; Cust.GetLegalEntityTypeLbl())
             {
             }
+            column(CustomerTINNo;Cust.TIN)
+            {
+
+            }
             column(Copy_Lbl; CopyLbl)
             {
             }
@@ -477,6 +481,10 @@ report 50101 "Tax Invoice Report"
                 }
                 column(Description_Line; Description)
                 {
+                }
+                column(Description_2;"Description 2")
+                {
+                    
                 }
                 column(Description_Line_Lbl; FieldCaption(Description))
                 {

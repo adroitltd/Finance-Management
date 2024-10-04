@@ -11,5 +11,15 @@ tableextension 50101 "Customer Ext" extends Customer
             Caption = 'TIN';
             DataClassification = ToBeClassified;
         }
+        field(50101; "Room No."; Text[50])
+        {
+            Caption = 'Room No.';
+            DataClassification = ToBeClassified;
+        }
+        field(50102; "Square Meters"; Text[200])
+        {
+            Caption = 'Square Meters';
+            DataClassification = ToBeClassified;
+        }
     }
 }

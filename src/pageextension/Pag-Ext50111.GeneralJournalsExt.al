@@ -7,9 +7,53 @@ pageextension 50111 "General Journals Ext" extends "General Journal"
 {
     layout
     {
+        modify("VAT Reporting Date")
+        {
+            Visible = false;
+        }
         modify("External Document No.")
         {
             Visible = true;
+        }
+        modify("EU 3-Party Trade")
+        {
+            Visible = false;
+        }
+        modify(Correction)
+        {
+            Visible = false;
+        }
+        modify(Comment)
+        {
+            Visible = false;
+        }
+        modify("Gen. Posting Type")
+        {
+            Visible = false;
+        }
+        modify("Gen. Bus. Posting Group")
+        {
+            Visible = false;
+        }
+        modify("Gen. Prod. Posting Group")
+        {
+            Visible = false;
+        }
+        modify("Bal. Gen. Posting Type")
+        {
+            Visible = false;
+        }
+        modify("Bal. Gen. Bus. Posting Group")
+        {
+            Visible = false;
+        }
+        modify("Bal. Gen. Prod. Posting Group")
+        {
+            Visible = false;
+        }
+        modify("Deferral Code")
+        {
+            Visible = false;
         }
         addbefore(Description)
         {
@@ -37,4 +81,37 @@ pageextension 50111 "General Journals Ext" extends "General Journal"
             }
         }
     }
+
+    actions
+    {
+        modify(Post)
+        {
+            trigger OnBeforeAction()
+            begin
+                "Check if Employee Posting Group is Specified"();
+            end;
+        }
+        modify(Preview)
+        {
+            trigger OnBeforeAction()
+            begin
+                "Check if Employee Posting Group is Specified"();
+            end;
+        }
+        modify(PostAndPrint)
+        {
+            trigger OnBeforeAction()
+            begin
+                "Check if Employee Posting Group is Specified"();
+            end;
+        }
+    }
+
+    local procedure "Check if Employee Posting Group is Specified"()
+    begin
+        if Rec."Account Type" = Rec."Account Type"::Employee then begin
+            if Rec."Employee Posting Group" = '' then
+                Rec.TestField("Employee Posting Group");
+        end;
+    end;
 }

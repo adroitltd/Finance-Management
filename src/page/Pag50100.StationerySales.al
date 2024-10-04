@@ -24,6 +24,7 @@ page 50100 "Stationery Sales"
     ApplicationArea = All;
     Caption = 'Stationery Sales';
     PageType = Document;
+    DeleteAllowed = false;
     RefreshOnActivate = true;
     SourceTable = "Sales Header";
     SourceTableView = where("Document Type" = filter(Order));
@@ -413,6 +414,8 @@ page 50100 "Stationery Sales"
         ShouldSearchForCustByName: Boolean;
         IsBidirectionalSyncEnabled: Boolean;
         FinanceManagement: Codeunit "Finance Management";
+        NoCashSaleSetupFound: Label 'No Cash Sale Setup found for Seller %1';
+        NoUserSetupFound: Label 'No User Setup found for User %1';
 
     protected var
         ShipToOptions: Enum "Sales Ship-to Options";
@@ -445,9 +448,9 @@ page 50100 "Stationery Sales"
                 Rec."ASL.Payment Method" := CashSaleSetup."Payment Method";
                 Rec."ASL.CashPaymentAccountNo" := CashSaleSetup."Cash Account No.";
             end else
-                Error('No Cash Sale Setup found for Seller %1', UserSetup."User ID");
+                Error(NoCashSaleSetupFound, UserSetup."User ID");
         end else
-            Error('No User Setup found for User %1', UserId);
+            Error(NoUserSetupFound, UserId);
     end;
 
     protected procedure PostSalesOrder(PostingCodeunitID: Integer; Navigate: Enum "Navigate After Posting")

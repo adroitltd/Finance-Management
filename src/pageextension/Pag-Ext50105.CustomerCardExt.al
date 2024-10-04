@@ -13,6 +13,14 @@ pageextension 50105 "Customer Card Ext" extends "Customer Card"
                 ApplicationArea = Basic, Suite;
                 ShowMandatory = true;
             }
+            field("Room No.";Rec."Room No.")
+            {
+                ApplicationArea=Basic, Suite;
+            }
+            field("Square Meters";Rec."Square Meters")
+            {
+                ApplicationArea=Basic, Suite;
+            }
         }
         modify("Payment Terms Code")
         {
