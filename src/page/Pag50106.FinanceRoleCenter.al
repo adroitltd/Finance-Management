@@ -99,8 +99,8 @@ page 50106 "Finance Role Center"
                 action("Stationery Sales")
                 {
                     ApplicationArea = All;
-                    RunObject = page "Stationery Sales";
-                    RunPageMode = Create;
+                    RunObject = page "Stationery Sales List";
+                    RunPageMode = View;
                 }
                 action("Sales Orders")
                 {
@@ -133,6 +133,12 @@ page 50106 "Finance Role Center"
                 {
                     ApplicationArea = All;
                     RunObject = page "Item List";
+                    RunPageMode = View;
+                }
+                action("Stationery Sales List")
+                {
+                    ApplicationArea = All;
+                    RunObject = page "Stationery Sales List";
                     RunPageMode = View;
                 }
                 action("Item Journals")
@@ -200,11 +206,11 @@ page 50106 "Finance Role Center"
                 RunObject = page "Payment Journal";
                 RunPageMode = Create;
             }
-            action("Item Journals ")
+            action("Stationery Sales List ")
             {
                 ApplicationArea = All;
-                RunObject = page "Item Journal";
-                RunPageMode = Create;
+                RunObject = page "Stationery Sales List";
+                RunPageMode = View;
             }
         }
         area(Creation)

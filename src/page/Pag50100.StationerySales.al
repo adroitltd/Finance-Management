@@ -92,6 +92,10 @@ page 50100 "Stationery Sales"
                         exit(Rec.LookupSellToCustomerName(Text));
                     end;
                 }
+                field("Cash Sale";Rec."Cash Sale")
+                {
+                    Visible=false;
+                }
                 group("Sell-to")
                 {
                     Caption = 'Sell-to';
@@ -315,6 +319,7 @@ page 50100 "Stationery Sales"
             CurrPage.Update(false);
 
         GetSellerDetails();
+        Rec."Cash Sale":=true;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)

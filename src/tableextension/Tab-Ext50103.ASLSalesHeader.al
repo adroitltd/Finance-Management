@@ -67,5 +67,11 @@ tableextension 50103 "ASL.SalesHeader" extends "Sales Header"
             DataClassification = ToBeClassified;
             Editable=false;
         }
+        field(50108; "Cash Sale"; Boolean)
+        {
+            Caption = 'Cash Sale';
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
     }
 }

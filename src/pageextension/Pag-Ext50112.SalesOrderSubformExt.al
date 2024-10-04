@@ -38,5 +38,9 @@ pageextension 50112 "Sales Order Subform Ext" extends "Sales Order Subform"
         {
             Visible=false;
         }
+        modify("Description 2")
+        {
+            Visible=true;
+        }
     }
 }
