@@ -38,6 +38,18 @@ report 50100 "LPO Report"
             column(CompanyAddress8; CompanyAddr[8])
             {
             }
+            column(BoxNo; CompanyInfo."Post Code")
+            {
+
+            }
+            column(City; CompanyInfo.City)
+            {
+
+            }
+            column(Country; CompanyInfo."Country/Region Code")
+            {
+
+            }
             column(CompanyHomePage_Lbl; HomePageCaptionLbl)
             {
             }
@@ -187,6 +199,10 @@ report 50100 "LPO Report"
             }
             column(DocumentDate; Format("Document Date", 0, 4))
             {
+            }
+            column(Posting_Date; Format("Posting Date", 0, 4))
+            {
+
             }
             column(DueDate; Format("Due Date", 0, 4))
             {

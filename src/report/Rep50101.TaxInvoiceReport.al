@@ -453,6 +453,10 @@ report 50101 "Tax Invoice Report"
             column(Bill_to_Name; "Bill-to Name")
             {
             }
+            column(Posting_Date;"Posting Date")
+            {
+                
+            }
             dataitem(Line; "Sales Invoice Line")
             {
                 DataItemLink = "Document No." = field("No.");

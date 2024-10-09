@@ -1,17 +1,20 @@
-report 50102 "Payment Receipt"
+namespace FinanceManagement.FinanceManagement;
+using Microsoft.Finance.GeneralLedger.Journal;
+using Microsoft.Foundation.Company;
+
+report 50112 "Vendor Receipt"
 {
+    Caption = 'Vendor Receipt';
     ApplicationArea = Basic, Suite;
-    Caption = 'Payment Receipt';
     UsageCategory = ReportsAndAnalysis;
-    DefaultRenderingLayout = "PaymentReceipt.rdl";
+    DefaultRenderingLayout = "VendorReceipt.rdl";
     WordMergeDataItem = GenJournalLine;
-    ShowPrintStatus=true;
 
     dataset
     {
         dataitem(GenJournalLine; "Gen. Journal Line")
         {
-            RequestFilterHeading = 'Payment Receipt';
+            RequestFilterHeading = 'Vendor Receipt';
             column(CompanyPicture; CompanyInfo.Picture)
             {
             }
@@ -567,7 +570,7 @@ report 50102 "Payment Receipt"
 
             trigger OnPreDataItem()
             begin
-                SetRange("Account Type", "Account Type"::Customer);
+                SetRange("Account Type", "Account Type"::Vendor);
             end;
         }
     }
@@ -593,12 +596,12 @@ report 50102 "Payment Receipt"
 
     rendering
     {
-        layout("PaymentReceipt.rdl")
+        layout("VendorReceipt.rdl")
         {
             Type = RDLC;
-            LayoutFile = './xLayout/PaymentReceipt.rdl';
-            Caption = 'Payment Receipt (RDLC)';
-            Summary = 'The Payment Receipt (RDLC) provides a basic layout.';
+            LayoutFile = './xLayout/VendorReceipt.rdl';
+            Caption = 'Vendor Receipt (RDLC)';
+            Summary = 'The Vendor Receipt (RDLC) provides a basic layout.';
         }
     }
 
