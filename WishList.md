@@ -9,6 +9,7 @@
 ### Perform a Cash Sale
 #### Go to Cash Sales then create.
 #### To see a list of Cash Sales go to Cash Sales List. If look for them in Sales Orders List you will not find them because there is a filter that focuses only on those with Cash Sale False
+#### When a cash sale is posted it prints a receipt automatically and also when a cash receipt journal is posted it generates a receipt
 
 ## Giving Gratuity and Activity Advances
 ### Giving the Advance
