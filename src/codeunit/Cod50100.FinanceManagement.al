@@ -200,7 +200,7 @@ codeunit 50100 "Finance Management"
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnAfterPostGenJnlLine', '', false, false)]
-    local procedure PrintCustomerReceiptAfterPostingPayment(var GenJournalLine: Record "Gen. Journal Line")
+    local procedure PrintCustomerReceipt(var GenJournalLine: Record "Gen. Journal Line")
     var
         TempBlob: Codeunit "Temp Blob";
         OutStream: OutStream;
@@ -214,19 +214,26 @@ codeunit 50100 "Finance Management"
         GenJnlLineFilter.SetRange("Journal Batch Name", GenJournalLine."Journal Batch Name");
         GenJnlLineFilter.SetRange("Document No.", GenJournalLine."Document No.");
         GenJnlLineFilter.SetRange("Account Type", GenJournalLine."Account Type"::Customer);
+
         if GenJnlLineFilter.FindSet() then begin
-            repeat begin
-                // Prevent printing of receipt for non cash sales in Cash Receipt Journals
-                if GenJnlLineFilter."Cash Sale Receipt No." = '' then exit;
-                if GenJnlLineFilter."Cash Sale Cust. Name" = '' then exit;
-                if GenJnlLineFilter.Narration = '' then exit;
-                RecRef.GetTable(GenJnlLineFilter);
-                TempBlob.CreateOutStream(OutStream);
-                Report.SaveAs(50103, '', ReportFormat::Pdf, OutStream, RecRef);
+            repeat
+                if (GenJnlLineFilter."Cash Sale Receipt No." <> '') or (GenJnlLineFilter."Cash Sale Cust. Name" <> '') or (GenJnlLineFilter.Narration <> '') then begin
+                    RecRef.GetTable(GenJnlLineFilter);
+                    TempBlob.CreateOutStream(OutStream);
+                    // Print Cash Sale Receipt
+                    Report.SaveAs(50103, '', ReportFormat::Pdf, OutStream, RecRef);
+                end else begin
+                    RecRef.GetTable(GenJnlLineFilter);
+                    TempBlob.CreateOutStream(OutStream);
+                    // Print Normal Receipt from Cash Receipt Journals
+                    Report.SaveAs(50102, '', ReportFormat::Pdf, OutStream, RecRef);
+                end;
+
                 TempBlob.CreateInStream(InStream);
                 FileName := 'CustomerReceipt.pdf';
                 DownloadFromStream(InStream, 'Printing Customer Receipt', '', '', FileName);
-            end until GenJnlLineFilter.Next() = 0;
+            until GenJnlLineFilter.Next() = 0;
         end;
     end;
+
 }

@@ -69,9 +69,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>2.21051cm</Top>
-            <Left>11.25106cm</Left>
+            <Left>9.99255cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.26199cm</Width>
+            <Width>8.01439cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -102,9 +102,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>2.77551cm</Top>
-            <Left>11.25106cm</Left>
+            <Left>9.99255cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.26199cm</Width>
+            <Width>8.01439cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -142,9 +142,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>3.37551cm</Top>
-            <Left>11.25106cm</Left>
+            <Left>9.99255cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.26199cm</Width>
+            <Width>8.01439cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -182,9 +182,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>3.97551cm</Top>
-            <Left>11.25106cm</Left>
+            <Left>9.99255cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.26199cm</Width>
+            <Width>8.01439cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -231,9 +231,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>4.57551cm</Top>
-            <Left>11.25106cm</Left>
+            <Left>9.99255cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.26199cm</Width>
+            <Width>8.01439cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -251,7 +251,7 @@
             <MIMEType>image/jpeg</MIMEType>
             <Sizing>FitProportional</Sizing>
             <Top>1.89301cm</Top>
-            <Left>7.32106cm</Left>
+            <Left>6.48172cm</Left>
             <Height>3cm</Height>
             <Width>3.33444cm</Width>
             <ZIndex>6</ZIndex>
@@ -263,9 +263,9 @@
           </Image>
           <Line Name="Line1">
             <Top>5.21078cm</Top>
-            <Left>17.56908cm</Left>
+            <Left>18.00042cm</Left>
             <Height>0cm</Height>
-            <Width>-10.34913cm</Width>
+            <Width>-10.78047cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>

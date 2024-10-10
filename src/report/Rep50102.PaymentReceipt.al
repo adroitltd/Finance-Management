@@ -563,6 +563,11 @@ report 50102 "Payment Receipt"
             begin
                 WriteAmountInWords.InitTextVariable();
                 WriteAmountInWords.FormatNoText(NoText, "Credit Amount", GenJournalLine."Currency Code");
+                Customer.Reset();
+                Customer.SetRange("No.", GenJournalLine."Account No.");
+                if Customer.FindSet() then begin
+                    "Customer Name" := Customer.Name;
+                end;
             end;
 
             trigger OnPreDataItem()
@@ -610,6 +615,8 @@ report 50102 "Payment Receipt"
 
     var
         CompanyInfo: Record "Company Information";
+        Customer: Record Customer;
         NoText: array[1] of Text;
         WriteAmountInWords: Codeunit "ASL.WriteAmountInWords";
+        "Customer Name": Text;
 }

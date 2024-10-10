@@ -5,7 +5,6 @@ using Microsoft.Purchases.Vendor;
 using Microsoft.Sales.RoleCenters;
 using Microsoft.Finance.GeneralLedger.Reports;
 using Microsoft.FixedAssets.Reports;
-using Microsoft.Finance.FinancialReports;
 using Microsoft.Finance.GeneralLedger.Journal;
 using Microsoft.Sales.Customer;
 using Microsoft.Finance.GeneralLedger.Account;
@@ -13,7 +12,6 @@ using Microsoft.Bank.BankAccount;
 using System.Automation;
 using Microsoft.FixedAssets.FixedAsset;
 using Microsoft.Finance.GeneralLedger.Budget;
-using Microsoft.Finance.Analysis;
 using Microsoft.Sales.Reports;
 using Microsoft.Purchases.Reports;
 using Microsoft.Inventory.Reports;
@@ -81,7 +79,7 @@ page 50106 "Finance Role Center"
                     RunObject = page "Posted Purchase Invoices";
                     RunPageMode = View;
                 }
-                action("Purchase Receipts")
+                action("Posted Purchase Receipts")
                 {
                     ApplicationArea = All;
                     RunObject = page "Posted Purchase Receipts";
@@ -212,6 +210,12 @@ page 50106 "Finance Role Center"
                 RunObject = page "Stationery Sales List";
                 RunPageMode = View;
             }
+            action("Bank Accounts")
+            {
+                ApplicationArea = All;
+                RunObject = page "Bank Account List";
+                RunPageMode = View;
+            }
         }
         area(Creation)
         {
@@ -325,6 +329,12 @@ page 50106 "Finance Role Center"
                     ApplicationArea = All;
                     Image=Report;
                     RunObject = report "Trial Balance/Budget";
+                }
+                action("Bank Account")
+                {
+                    ApplicationArea = All;
+                    Image = Report;
+                    RunObject = report "Bank Acc Trial Bal.";
                 }
             }
         }

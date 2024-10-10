@@ -35,36 +35,5 @@ tableextension 50106 "ASL.GenJournalLineExt" extends "Gen. Journal Line"
             DataClassification = ToBeClassified;
             TableRelation = "Employee Posting Group".Code;
         }
-        field(50105; "Customer Name"; Text[1028])
-        {
-            Caption = 'Customer Name';
-            DataClassification = ToBeClassified;
-            Editable=false;
-        }
-        modify("Account No.")
-        {
-            trigger OnAfterValidate()
-            var
-                Customer: Record Customer;
-                Vendor: Record Vendor;
-            begin
-                Customer.Reset();
-                Customer.SetRange("No.", "Account No.");
-                if Customer.FindSet() then begin
-                    repeat begin
-                        "Customer Name":=Customer.Name;
-                        Modify();
-                    end until Customer.Next()=0;
-                end;
-                Vendor.Reset();
-                Vendor.SetRange("No.", "Account No.");
-                if Vendor.FindSet() then begin
-                    repeat begin
-                        "Customer Name" := Vendor.Name;
-                        Modify();
-                    end until Vendor.Next() = 0;
-                end;
-            end;
-        }
     }
 }
