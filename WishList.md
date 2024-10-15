@@ -1,4 +1,4 @@
-# Finance Management Extension in Business Central
+# Finance Management in Business Central
 ## Features
 ### Cash Sales
 ### Advance Management
