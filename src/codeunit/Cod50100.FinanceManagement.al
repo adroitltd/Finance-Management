@@ -16,6 +16,8 @@ codeunit 50100 "Finance Management"
             NewReportId := Report::"Tax Invoice Report";
         if ReportId = Report::"Bank Acc. - Detail Trial Bal." then
             NewReportId := Report::"Bank Acc Trial Bal.";
+        if ReportId = Report::"Trial Balance/Budget" then
+            NewReportId := Report::"Budget Trial Balance";
     end;
 
     local procedure GetSalesSetup()
@@ -105,6 +107,7 @@ codeunit 50100 "Finance Management"
             "Gen. Journal Account Type"::Customer,
             SalesInvHeader."Bill-to Customer No.",
             SalesInvHeader."Cash Sale Cust. Name",
+            SalesInvHeader.Narration,
             SalesInvHeader."Cash Sale Cust. Telephone No.",
             SalesInvHeader.Narration,
             0,
@@ -130,6 +133,7 @@ codeunit 50100 "Finance Management"
         AccountType: Enum "Gen. Journal Account Type";
         AccountNo: Code[20];
         CustomerName: Text[100];
+        Description: Text;
         CustomerTelephoneNo: Text[15];
         CashSaleNarration: Text;
         DebitAmount: Decimal;
@@ -159,6 +163,7 @@ codeunit 50100 "Finance Management"
         GenJournalLine.Validate("Cash Sale Receipt No.", CashSaleReceiptNo);
         GenJournalLine.Validate("Account Type", AccountType);
         GenJournalLine.Validate("Account No.", AccountNo);
+        GenJournalLine.Validate(Description, Description);
         GenJournalLine.Validate("Cash Sale Cust. Name", CustomerName);
         GenJournalLine.Validate("Cash Sale Cust. Telephone No.", CustomerTelephoneNo);
         GenJournalLine.Validate(Narration, CashSaleNarration);
@@ -235,5 +240,4 @@ codeunit 50100 "Finance Management"
             until GenJnlLineFilter.Next() = 0;
         end;
     end;
-
 }

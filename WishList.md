@@ -1,6 +1,6 @@
-# Finance Management Extension in Business Central using AL (Application Language)
+# Finance Management Extension in Business Central
 ## Features
-### POS Sales
+### Cash Sales
 ### Advance Management
 
 ## Cash Sales
@@ -8,7 +8,7 @@
 #### Go to User Setup and add the user. Go to ASL.PaymentMethods to setup the method of payment then finally go to Cash Sale Setup to add a user as a seller and the G/L account to post the transactions.
 ### Perform a Cash Sale
 #### Go to Cash Sales then create.
-#### To see a list of Cash Sales go to Cash Sales List. If look for them in Sales Orders List you will not find them because there is a filter that focuses only on those with Cash Sale False
+#### To see a list of Cash Sales go to Stationery Sales List. If look for them in Sales Orders List you will not find them because there is a filter that focuses only on those with Cash Sale False
 #### When a cash sale is posted it prints a receipt automatically and also when a cash receipt journal is posted it generates a receipt
 
 ## Giving Gratuity and Activity Advances

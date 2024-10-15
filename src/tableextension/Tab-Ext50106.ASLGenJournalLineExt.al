@@ -35,5 +35,11 @@ tableextension 50106 "ASL.GenJournalLineExt" extends "Gen. Journal Line"
             DataClassification = ToBeClassified;
             TableRelation = "Employee Posting Group".Code;
         }
+        field(50105; "Customer Name"; Text[1028])
+        {
+            Caption = 'Customer Name';
+            DataClassification = ToBeClassified;
+            Editable=false;
+        }
     }
 }
