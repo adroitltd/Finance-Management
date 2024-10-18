@@ -9,6 +9,7 @@ pageextension 50117 "Sales Credit Memo Ext" extends "Sales Credit Memo"
         modify("No.")
         {
             Visible=true;
+            Editable=false;
         }
     }
 }

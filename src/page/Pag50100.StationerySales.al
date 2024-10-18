@@ -45,7 +45,8 @@ page 50100 "Stationery Sales"
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies the number of the involved entry or record, according to the specified number series.';
                     Caption = 'No.';
-                    Visible = DocNoVisible;
+                    Visible = true;
+                    Editable=false;
 
                     trigger OnAssistEdit()
                     begin
