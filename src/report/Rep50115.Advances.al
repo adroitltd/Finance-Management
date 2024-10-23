@@ -1,24 +1,27 @@
 namespace FinanceManagement.FinanceManagement;
 
-using Microsoft.Sales.Receivables;
-using Microsoft.Sales.Customer;
+using Microsoft.HumanResources.Payables;
+using Microsoft.HumanResources.Employee;
 using Microsoft.Foundation.Company;
 
-report 50114 Receipt
+/// <summary>
+/// Not yet focusing on checking if advance was already accounted for. 
+/// Just brings entries in Employee Ledger Entry and filters per Employee Posting Group
+/// </summary>
+report 50115 Advances
 {
     ApplicationArea = All;
-    Caption = 'Receipt';
+    Caption = 'Advances';
     UsageCategory = ReportsAndAnalysis;
-    DefaultLayout=RDLC;
-    RDLCLayout='./xLayout/Receipt.rdl';
+    DefaultLayout = RDLC;
+    RDLCLayout = './xLayout/Advances.rdl';
 
     dataset
     {
-        dataitem(CustLedgerEntry; "Cust. Ledger Entry")
+        dataitem(EmployeeLedgerEntry; "Employee Ledger Entry")
         {
-            RequestFilterHeading='Customer Ledger Entries';
-            RequestFilterFields="Customer No.", "Customer Name", "Posting Date";
-
+            RequestFilterHeading = 'Employee Advances';
+            RequestFilterFields = "Employee Posting Group", "Posting Date";
             column(CompanyPicture; CompanyInfo.Picture)
             {
             }
@@ -40,11 +43,18 @@ report 50114 Receipt
             column(CompanyTIN; CompanyInfo."TIN NO.")
             {
             }
+            column(TitleLabel; TitleLabel)
+            {
+            }
             column(EntryNo; "Entry No.")
             {
             }
-            column(CustomerNo; "Customer No.")
+            column(EmployeeNo; "Employee No.")
             {
+            }
+            column(EmployeeName; EmployeeName)
+            {
+
             }
             column(PostingDate; "Posting Date")
             {
@@ -56,12 +66,6 @@ report 50114 Receipt
             {
             }
             column(Description; Description)
-            {
-            }
-            column(CustomerName; CustomerName)
-            {
-            }
-            column(YourReference; "Your Reference")
             {
             }
             column(CurrencyCode; "Currency Code")
@@ -82,19 +86,7 @@ report 50114 Receipt
             column(AmountLCY; "Amount (LCY)")
             {
             }
-            column(SalesLCY; "Sales (LCY)")
-            {
-            }
-            column(ProfitLCY; "Profit (LCY)")
-            {
-            }
-            column(InvDiscountLCY; "Inv. Discount (LCY)")
-            {
-            }
-            column(SelltoCustomerNo; "Sell-to Customer No.")
-            {
-            }
-            column(CustomerPostingGroup; "Customer Posting Group")
+            column(EmployeePostingGroup; "Employee Posting Group")
             {
             }
             column(GlobalDimension1Code; "Global Dimension 1 Code")
@@ -103,16 +95,13 @@ report 50114 Receipt
             column(GlobalDimension2Code; "Global Dimension 2 Code")
             {
             }
-            column(SalespersonCode; "Salesperson Code")
+            column(SalespersPurchCode; "Salespers./Purch. Code")
             {
             }
             column(UserID; "User ID")
             {
             }
             column(SourceCode; "Source Code")
-            {
-            }
-            column(OnHold; "On Hold")
             {
             }
             column(AppliestoDocType; "Applies-to Doc. Type")
@@ -122,21 +111,6 @@ report 50114 Receipt
             {
             }
             column(Open; Open)
-            {
-            }
-            column(DueDate; "Due Date")
-            {
-            }
-            column(PmtDiscountDate; "Pmt. Discount Date")
-            {
-            }
-            column(OriginalPmtDiscPossible; "Original Pmt. Disc. Possible")
-            {
-            }
-            column(PmtDiscGivenLCY; "Pmt. Disc. Given (LCY)")
-            {
-            }
-            column(OrigPmtDiscPossibleLCY; "Orig. Pmt. Disc. Possible(LCY)")
             {
             }
             column(Positive; Positive)
@@ -187,21 +161,6 @@ report 50114 Receipt
             column(CreditAmountLCY; "Credit Amount (LCY)")
             {
             }
-            column(DocumentDate; "Document Date")
-            {
-            }
-            column(ExternalDocumentNo; "External Document No.")
-            {
-            }
-            column(CalculateInterest; "Calculate Interest")
-            {
-            }
-            column(ClosingInterestCalculated; "Closing Interest Calculated")
-            {
-            }
-            column(NoSeries; "No. Series")
-            {
-            }
             column(ClosedbyCurrencyCode; "Closed by Currency Code")
             {
             }
@@ -217,31 +176,7 @@ report 50114 Receipt
             column(OriginalAmount; "Original Amount")
             {
             }
-            column(RemainingPmtDiscPossible; "Remaining Pmt. Disc. Possible")
-            {
-            }
-            column(PmtDiscToleranceDate; "Pmt. Disc. Tolerance Date")
-            {
-            }
-            column(MaxPaymentTolerance; "Max. Payment Tolerance")
-            {
-            }
-            column(LastIssuedReminderLevel; "Last Issued Reminder Level")
-            {
-            }
-            column(AcceptedPaymentTolerance; "Accepted Payment Tolerance")
-            {
-            }
-            column(AcceptedPmtDiscTolerance; "Accepted Pmt. Disc. Tolerance")
-            {
-            }
-            column(PmtToleranceLCY; "Pmt. Tolerance (LCY)")
-            {
-            }
             column(AmounttoApply; "Amount to Apply")
-            {
-            }
-            column(ICPartnerCode; "IC Partner Code")
             {
             }
             column(ApplyingEntry; "Applying Entry")
@@ -256,19 +191,13 @@ report 50114 Receipt
             column(ReversedEntryNo; "Reversed Entry No.")
             {
             }
-            column(Prepayment; Prepayment)
+            column(CreditorNo; "Creditor No.")
             {
             }
             column(PaymentReference; "Payment Reference")
             {
             }
             column(PaymentMethodCode; "Payment Method Code")
-            {
-            }
-            column(AppliestoExtDocNo; "Applies-to Ext. Doc. No.")
-            {
-            }
-            column(RecipientBankAccount; "Recipient Bank Account")
             {
             }
             column(MessagetoRecipient; "Message to Recipient")
@@ -298,33 +227,21 @@ report 50114 Receipt
             column(ShortcutDimension8Code; "Shortcut Dimension 8 Code")
             {
             }
-            column(DirectDebitMandateID; "Direct Debit Mandate ID")
-            {
-            }
-            column(DisputeStatus; "Dispute Status")
-            {
-            }
-            column(PromisedPayDate; "Promised Pay Date")
-            {
-            }
-            column(AmountInWords; NoText[1])
-            {
-            }
 
             trigger OnAfterGetRecord()
             begin
-                WriteAmountInWords.InitTextVariable();
-                WriteAmountInWords.FormatNoText(NoText, "Credit Amount", CustLedgerEntry."Currency Code");
-           
-                Customer.Reset();
-                Customer.SetRange("No.", CustLedgerEntry."Customer No.");
-                if Customer.FindSet() then
-                    CustomerName := Customer.Name;
+                Employee.Reset();
+                Employee.SetRange("No.", EmployeeLedgerEntry."Employee No.");
+                if Employee.FindSet() then
+                    EmployeeName := Employee.FullName();
             end;
 
             trigger OnPreDataItem()
             begin
-                SetRange("Document Type", "Document Type"::Payment);
+                if EmployeeLedgerEntry."Employee Posting Group" = 'ACTIV*' then
+                    TitleLabel := ActivitiesAdvancesLabel
+                else if EmployeeLedgerEntry."Employee Posting Group" = 'GRAT*' then
+                    TitleLabel := GratuityAdvancesLabel;
             end;
         }
     }
@@ -355,8 +272,9 @@ report 50114 Receipt
 
     var
         CompanyInfo: Record "Company Information";
-        NoText: array[1] of Text;
-        WriteAmountInWords: Codeunit "ASL.WriteAmountInWords";
-        Customer: Record Customer;
-        CustomerName: Text;
+        TitleLabel: Text;
+        ActivitiesAdvancesLabel: Label 'Activities Advances';
+        GratuityAdvancesLabel: Label 'Gratuity Advances';
+        Employee: Record Employee;
+        EmployeeName: Text;
 }

@@ -1,6 +1,7 @@
 namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Sales.Customer;
+using Microsoft.Sales.Receivables;
 
 pageextension 50105 "Customer Card Ext" extends "Customer Card"
 {
@@ -22,13 +23,26 @@ pageextension 50105 "Customer Card Ext" extends "Customer Card"
                 ApplicationArea=Basic, Suite;
             }
         }
-        modify("Payment Terms Code")
+    }
+    actions
+    {
+        addafter("Report Customer - Balance to Date")
         {
-            trigger OnAfterValidate()
-            begin
-                if Rec.TIN = '' then
-                    Message('Please enter NIN number for customer %1', Rec."No.");
-            end;
+            action("Print Receipt")
+            {
+                Image=Receipt;
+                Promoted=true;
+                PromotedCategory=Report;
+                trigger OnAction()
+                var
+                    CustomerLedgerEntry: Record "Cust. Ledger Entry";
+                begin
+                    CustomerLedgerEntry.Reset();
+                    CustomerLedgerEntry.SetRange("Customer No.", Rec."No.");
+                    if CustomerLedgerEntry.FindFirst() then
+                        Report.Run(50114, true, false, CustomerLedgerEntry);
+                end;
+            }
         }
     }
 }
