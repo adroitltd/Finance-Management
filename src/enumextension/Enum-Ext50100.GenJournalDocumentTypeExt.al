@@ -4,6 +4,9 @@ using Microsoft.Finance.GeneralLedger.Journal;
 
 enumextension 50100 "Gen. Journal Document Type Ext" extends "Gen. Journal Document Type"
 {
+    /// <summary>
+    /// Added Other Document Types for General Journal Document Type
+    /// </summary>
     value(50100; "ASL.PRL.ActivityAdvance")
     {
         Caption = 'Activity Advance';
