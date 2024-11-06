@@ -21,7 +21,7 @@ report 50115 Advances
         dataitem(EmployeeLedgerEntry; "Employee Ledger Entry")
         {
             RequestFilterHeading = 'Employee Advances';
-            RequestFilterFields = "Employee Posting Group", "Posting Date";
+            RequestFilterFields = "Employee Posting Group", "Employee No.", "Posting Date";
             column(CompanyPicture; CompanyInfo.Picture)
             {
             }
@@ -73,6 +73,7 @@ report 50115 Advances
             }
             column(Amount; Amount)
             {
+                AutoFormatType=1;
             }
             column(RemainingAmount; "Remaining Amount")
             {
@@ -227,21 +228,20 @@ report 50115 Advances
             column(ShortcutDimension8Code; "Shortcut Dimension 8 Code")
             {
             }
+            column(AdvanceBalance;AdvanceBalance)
+            {
+
+            }
 
             trigger OnAfterGetRecord()
             begin
                 Employee.Reset();
                 Employee.SetRange("No.", EmployeeLedgerEntry."Employee No.");
-                if Employee.FindSet() then
+                if Employee.FindSet() then begin
                     EmployeeName := Employee.FullName();
-            end;
-
-            trigger OnPreDataItem()
-            begin
-                if EmployeeLedgerEntry."Employee Posting Group" = 'ACTIV*' then
-                    TitleLabel := ActivitiesAdvancesLabel
-                else if EmployeeLedgerEntry."Employee Posting Group" = 'GRAT*' then
-                    TitleLabel := GratuityAdvancesLabel;
+                end;
+                AdvanceBalance += EmployeeLedgerEntry.Amount;
+                TitleLabel := EmployeeLedgerEntry."Employee Posting Group";
             end;
         }
     }
@@ -273,8 +273,7 @@ report 50115 Advances
     var
         CompanyInfo: Record "Company Information";
         TitleLabel: Text;
-        ActivitiesAdvancesLabel: Label 'Activities Advances';
-        GratuityAdvancesLabel: Label 'Gratuity Advances';
         Employee: Record Employee;
         EmployeeName: Text;
+        AdvanceBalance: Decimal;
 }

@@ -68,7 +68,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>2.21051cm</Top>
+            <Top>2.17551cm</Top>
             <Left>9.99255cm</Left>
             <Height>0.6cm</Height>
             <Width>8.01439cm</Width>
@@ -263,9 +263,9 @@
           </Image>
           <Line Name="Line1">
             <Top>5.21078cm</Top>
-            <Left>18.00042cm</Left>
+            <Left>18.00302cm</Left>
             <Height>0cm</Height>
-            <Width>-10.78047cm</Width>
+            <Width>-11.52391cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -500,21 +500,23 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>USHS</Value>
+                    <Value>=First(Fields!CurrencyCode.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>10.13507cm</Top>
-            <Left>3.85565cm</Left>
+            <Left>2.33871cm</Left>
             <Height>0.6cm</Height>
-            <Width>1.10653cm</Width>
+            <Width>2.62347cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
@@ -827,6 +829,49 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TIN: </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CustomerTIN.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.89301cm</Top>
+            <Left>0.47861cm</Left>
+            <Height>0.6cm</Height>
+            <Width>5.82672cm</Width>
+            <ZIndex>22</ZIndex>
+            <Visibility>
+              <Hidden>=IIf(IsNothing(Fields!CustomerTIN.Value) Or Fields!CustomerTIN.Value = "", True, False)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>13.935cm</Height>
         <Style>
@@ -913,6 +958,9 @@ End Function
         </Field>
         <Field Name="Cash_Sale_Cust__Name">
           <DataField>Cash_Sale_Cust__Name</DataField>
+        </Field>
+        <Field Name="CustomerTIN">
+          <DataField>CustomerTIN</DataField>
         </Field>
         <Field Name="Cash_Sale_Cust__Telephone_No_">
           <DataField>Cash_Sale_Cust__Telephone_No_</DataField>

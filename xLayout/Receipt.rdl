@@ -533,7 +533,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>USHS</Value>
+                    <Value>=First(Fields!Currency_Code.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>9pt</FontSize>
@@ -545,9 +545,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>10.13507cm</Top>
-            <Left>3.85565cm</Left>
+            <Left>3.20301cm</Left>
             <Height>0.6cm</Height>
-            <Width>1.10653cm</Width>
+            <Width>1.75917cm</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
@@ -852,6 +852,49 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TIN: </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CustomerTIN.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.89301cm</Top>
+            <Left>0.47861cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.36689cm</Width>
+            <ZIndex>23</ZIndex>
+            <Visibility>
+              <Hidden>=IIf(IsNothing(Fields!CustomerTIN.Value) Or Fields!CustomerTIN.Value = "", True, False)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>13.935cm</Height>
         <Style>
@@ -956,6 +999,9 @@ End Function
         </Field>
         <Field Name="CustomerName">
           <DataField>CustomerName</DataField>
+        </Field>
+        <Field Name="CustomerTIN">
+          <DataField>CustomerTIN</DataField>
         </Field>
         <Field Name="YourReference">
           <DataField>YourReference</DataField>
@@ -1283,6 +1329,9 @@ End Function
         </Field>
         <Field Name="AmountInWords">
           <DataField>AmountInWords</DataField>
+        </Field>
+        <Field Name="Currency_Code">
+          <DataField>Currency_Code</DataField>
         </Field>
       </Fields>
       <Query>

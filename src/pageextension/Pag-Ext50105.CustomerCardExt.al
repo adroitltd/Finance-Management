@@ -26,13 +26,14 @@ pageextension 50105 "Customer Card Ext" extends "Customer Card"
     }
     actions
     {
-        addafter("Report Customer - Balance to Date")
+        addafter("S&ales")
         {
             action("Print Receipt")
             {
                 Image=Receipt;
                 Promoted=true;
                 PromotedCategory=Report;
+                ApplicationArea=Basic, Suite;
                 trigger OnAction()
                 var
                     CustomerLedgerEntry: Record "Cust. Ledger Entry";

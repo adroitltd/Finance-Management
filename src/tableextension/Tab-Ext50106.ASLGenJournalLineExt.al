@@ -1,8 +1,6 @@
 namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Finance.GeneralLedger.Journal;
-using Microsoft.Purchases.Vendor;
-using Microsoft.Sales.Customer;
 using Microsoft.HumanResources.Employee;
 
 tableextension 50106 "ASL.GenJournalLineExt" extends "Gen. Journal Line"

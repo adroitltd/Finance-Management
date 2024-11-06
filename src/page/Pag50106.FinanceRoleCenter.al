@@ -270,6 +270,12 @@ page 50106 "Finance Role Center"
                     Image = Report;
                     RunObject = report "Stationery Trial Balance";
                 }
+                action(Advances)
+                {
+                    ApplicationArea=All;
+                    Image=Report;
+                    RunObject=report Advances;
+                }
                 action("Stationery Cost & Price")
                 {
                     ApplicationArea = All;

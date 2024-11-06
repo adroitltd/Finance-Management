@@ -15,10 +15,14 @@ pageextension 50111 "General Journals Ext" extends "General Journal"
         {
             Visible = true;
         }
-        modify("EU 3-Party Trade")
+        modify("Currency Code")
         {
-            Visible = false;
+            Visible=true;
         }
+        // modify("EU 3-Party Trade")
+        // {
+        //     Visible = false;
+        // }
         modify(Correction)
         {
             Visible = false;
@@ -75,9 +79,10 @@ pageextension 50111 "General Journals Ext" extends "General Journal"
                     end;
                 end;
             }
-            field("Posting Group"; Rec."Posting Group")
+            field("Posting Group "; Rec."Posting Group")
             {
                 ApplicationArea = All;
+                Editable=false;
             }
         }
     }
@@ -88,30 +93,38 @@ pageextension 50111 "General Journals Ext" extends "General Journal"
         {
             trigger OnBeforeAction()
             begin
-                "Check if Employee Posting Group is Specified"();
+                "Check if Employee Posting Group and Document Type is Specified"();
             end;
         }
         modify(Preview)
         {
             trigger OnBeforeAction()
             begin
-                "Check if Employee Posting Group is Specified"();
+                "Check if Employee Posting Group and Document Type is Specified"();
             end;
         }
         modify(PostAndPrint)
         {
             trigger OnBeforeAction()
             begin
-                "Check if Employee Posting Group is Specified"();
+                "Check if Employee Posting Group and Document Type is Specified"();
             end;
         }
     }
 
-    local procedure "Check if Employee Posting Group is Specified"()
+    local procedure "Check if Employee Posting Group and Document Type is Specified"()
+    var
+        GenJournalLine: Record "Gen. Journal Line";
     begin
-        if Rec."Account Type" = Rec."Account Type"::Employee then begin
-            if Rec."Employee Posting Group" = '' then
-                Rec.TestField("Employee Posting Group");
-        end;
+        GenJournalLine.SetRange("Journal Template Name", Rec."Journal Template Name");
+        GenJournalLine.SetRange("Journal Batch Name", Rec."Journal Batch Name");
+        if GenJournalLine.FindSet() then
+            repeat
+                if GenJournalLine."Account Type" = GenJournalLine."Account Type"::Employee then begin
+                    GenJournalLine.TestField("Employee Posting Group");
+                    if GenJournalLine."Document Type" = GenJournalLine."Document Type"::" " then
+                        Error('Please Specify Document Type');
+                end;
+            until GenJournalLine.Next() = 0;
     end;
 }

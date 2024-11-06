@@ -13,5 +13,9 @@ pageextension 50114 "Posted Sales Invoice Ext" extends "Posted Sales Invoice"
                 ApplicationArea=Basic, Suite;
             }
         }
+        modify(Closed)
+        {
+            Editable=true;
+        }
     }
 }

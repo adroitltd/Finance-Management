@@ -2,6 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Sales.Receivables;
 using Microsoft.Sales.Customer;
+using Microsoft.Finance.GeneralLedger.Setup;
 using Microsoft.Foundation.Company;
 
 report 50114 Receipt
@@ -60,6 +61,10 @@ report 50114 Receipt
             }
             column(CustomerName; CustomerName)
             {
+            }
+            column(CustomerTIN;CustomerTIN)
+            {
+
             }
             column(YourReference; "Your Reference")
             {
@@ -310,6 +315,9 @@ report 50114 Receipt
             column(AmountInWords; NoText[1])
             {
             }
+            column(Currency_Code; "Currency Code")
+            {
+            }
 
             trigger OnAfterGetRecord()
             begin
@@ -318,13 +326,20 @@ report 50114 Receipt
            
                 Customer.Reset();
                 Customer.SetRange("No.", CustLedgerEntry."Customer No.");
-                if Customer.FindSet() then
+                if Customer.FindSet() then begin
                     CustomerName := Customer.Name;
+                    CustomerTIN:=Customer.TIN;
+                end;
+
+                if "Currency Code" = '' then begin
+                    GenLedgerSetup.Get();
+                    "Currency Code" := GenLedgerSetup."LCY Code";
+                end;
             end;
 
             trigger OnPreDataItem()
             begin
-                SetRange("Document Type", "Document Type"::Payment);
+                // SetRange("Document Type", "Document Type"::Payment);
             end;
         }
     }
@@ -359,4 +374,6 @@ report 50114 Receipt
         WriteAmountInWords: Codeunit "ASL.WriteAmountInWords";
         Customer: Record Customer;
         CustomerName: Text;
+        CustomerTIN: Text;
+        GenLedgerSetup: Record "General Ledger Setup";
 }

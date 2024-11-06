@@ -33,8 +33,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.72273cm</Top>
-            <Left>6.4262cm</Left>
+            <Top>2.89912cm</Top>
+            <Left>4.5332cm</Left>
             <Height>0.6cm</Height>
             <Width>9.82014cm</Width>
             <Style>
@@ -65,8 +65,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>3.32273cm</Top>
-            <Left>6.4262cm</Left>
+            <Top>3.49912cm</Top>
+            <Left>4.5332cm</Left>
             <Height>0.6cm</Height>
             <Width>9.82014cm</Width>
             <ZIndex>1</ZIndex>
@@ -85,8 +85,8 @@
             <Value>=First(Fields!CompanyPicture.Value, "DataSet_Result")</Value>
             <MIMEType>image/jpeg</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Top>0.3937cm</Top>
-            <Left>9.33662cm</Left>
+            <Top>0.57009cm</Top>
+            <Left>7.44362cm</Left>
             <Height>2.15264cm</Height>
             <Width>4.02167cm</Width>
             <ZIndex>2</ZIndex>
@@ -100,25 +100,28 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.1069cm</Width>
+                  <Width>1.50182cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.40677cm</Width>
+                  <Width>1.84547cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.92371cm</Width>
+                  <Width>3.65377cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.40677cm</Width>
+                  <Width>2.18629cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.628cm</Width>
+                  <Width>1.74877cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.26566cm</Width>
+                  <Width>3.42163cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.08927cm</Width>
+                  <Width>1.99572cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.27731cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -134,10 +137,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Posting Date</Value>
+                                  <Value>Date</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -150,9 +153,13 @@
                           <rd:DefaultName>Textbox11</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -170,10 +177,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Employee No</Value>
+                                  <Value>Emp No</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -184,9 +191,13 @@
                           <rd:DefaultName>Textbox5</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -207,7 +218,7 @@
                                   <Value>Employee Name</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -218,9 +229,51 @@
                           <rd:DefaultName>Textbox7</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Document Type</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -238,10 +291,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Document No</Value>
+                                  <Value>Doc. No</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -252,9 +305,13 @@
                           <rd:DefaultName>Textbox9</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -275,7 +332,7 @@
                                   <Value>Description</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -286,9 +343,13 @@
                           <rd:DefaultName>Textbox14</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -306,10 +367,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Amount</Value>
+                                  <Value>Debit</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -322,9 +383,13 @@
                           <rd:DefaultName>Textbox18</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -335,17 +400,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox16">
+                        <Textbox Name="Textbox8">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Balance</Value>
+                                  <Value>Credit</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -355,12 +420,16 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox16</rd:DefaultName>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -386,7 +455,7 @@
                                   <Value>=Fields!PostingDate.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>8pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <Format>d</Format>
                                   </Style>
                                 </TextRun>
@@ -399,8 +468,7 @@
                           <rd:DefaultName>PostingDate</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -422,7 +490,7 @@
                                   <Value>=Fields!EmployeeNo.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>8pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -432,8 +500,7 @@
                           <rd:DefaultName>EmployeeNo</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -455,7 +522,7 @@
                                   <Value>=Fields!EmployeeName.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>8pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -465,8 +532,39 @@
                           <rd:DefaultName>EmployeeName</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DocumentType">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!DocumentType.Value</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontSize>7pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DocumentType</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -488,7 +586,7 @@
                                   <Value>=Fields!DocumentNo.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>8pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -498,8 +596,7 @@
                           <rd:DefaultName>DocumentNo</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -521,7 +618,7 @@
                                   <Value>=Fields!Description.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>8pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -531,8 +628,7 @@
                           <rd:DefaultName>Description</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -551,11 +647,11 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!DebitAmount.Value</Value>
+                                  <Value>=IIF(Fields!DebitAmount.Value = 0, Nothing, Fields!DebitAmount.Value)</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
+                                    <FontSize>7pt</FontSize>
+                                    <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -567,8 +663,7 @@
                           <rd:DefaultName>Amount</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -580,17 +675,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="RemainingAmount">
+                        <Textbox Name="CreditAmount">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!CreditAmount.Value</Value>
+                                  <Value>=IIF(Fields!CreditAmount.Value = 0, Nothing, Fields!CreditAmount.Value)</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
-                                    <FontSize>8pt</FontSize>
+                                    <FontSize>7pt</FontSize>
                                     <Format>#,0.00;(#,0.00)</Format>
                                   </Style>
                                 </TextRun>
@@ -600,11 +695,10 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>RemainingAmount</rd:DefaultName>
+                          <rd:DefaultName>CreditAmount</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -627,6 +721,7 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -640,10 +735,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>4.87551cm</Top>
-            <Left>0.49953cm</Left>
+            <Top>4.94607cm</Top>
+            <Left>0.51153cm</Left>
             <Height>1.2cm</Height>
-            <Width>19.82707cm</Width>
+            <Width>18.63077cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -664,13 +759,20 @@
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
+                  <TextRun>
+                    <Value> REPORT</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>4.09912cm</Top>
-            <Left>0.49953cm</Left>
+            <Top>4.24023cm</Top>
+            <Left>0.51153cm</Left>
             <Height>0.6cm</Height>
             <Width>15.74681cm</Width>
             <ZIndex>4</ZIndex>
@@ -684,15 +786,67 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Balance: </Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Sum(Fields!Amount.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>6.32246cm</Top>
+            <Left>4.94424cm</Left>
+            <Height>0.6cm</Height>
+            <Width>9.82014cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>8.06097cm</Height>
-        <Style />
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <BottomBorder>
+            <Color>Black</Color>
+            <Style>Solid</Style>
+            <Width>1.5pt</Width>
+          </BottomBorder>
+        </Style>
       </Body>
-      <Width>20.69042cm</Width>
+      <Width>19.54265cm</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
-        <LeftMargin>0cm</LeftMargin>
+        <LeftMargin>0.5cm</LeftMargin>
         <RightMargin>0cm</RightMargin>
         <TopMargin>0cm</TopMargin>
         <BottomMargin>0cm</BottomMargin>
@@ -994,6 +1148,12 @@ End Function
         </Field>
         <Field Name="ShortcutDimension8Code">
           <DataField>ShortcutDimension8Code</DataField>
+        </Field>
+        <Field Name="AdvanceBalance">
+          <DataField>AdvanceBalance</DataField>
+        </Field>
+        <Field Name="AdvanceBalanceFormat">
+          <DataField>AdvanceBalanceFormat</DataField>
         </Field>
       </Fields>
       <Query>

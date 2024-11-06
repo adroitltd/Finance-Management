@@ -19,25 +19,25 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.61863cm</Width>
+                  <Width>1.77392cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.19659cm</Width>
+                  <Width>2.35188cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.19857cm</Width>
+                  <Width>2.35386cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>10.35289cm</Width>
+                  <Width>7.62082cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.50201cm</Width>
+                  <Width>2.34522cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.32275cm</Width>
+                  <Width>2.26437cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.20037cm</Width>
+                  <Width>0.07938cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.07938cm</Width>
@@ -1475,6 +1475,9 @@
                           </Paragraphs>
                           <ZIndex>11</ZIndex>
                           <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
                             <FontFamily>Segoe UI</FontFamily>
                             <FontSize>8pt</FontSize>
                             <VerticalAlign>Top</VerticalAlign>
@@ -2282,7 +2285,7 @@
             <Top>28.02598pt</Top>
             <Left>0.1875in</Left>
             <Height>2.82222cm</Height>
-            <Width>26.55057cm</Width>
+            <Width>18.94821cm</Width>
             <Style>
               <FontFamily>Segoe UI</FontFamily>
               <FontSize>8pt</FontSize>
@@ -2309,7 +2312,7 @@
             </Paragraphs>
             <Left>0.1875in</Left>
             <Height>11pt</Height>
-            <Width>25.04388cm</Width>
+            <Width>18.94821cm</Width>
             <ZIndex>1</ZIndex>
             <Visibility>
               <Hidden>=IIF(not Fields!ExcludeBalanceOnly.Value,False,True)</Hidden>
@@ -2344,7 +2347,7 @@
             <Top>13.6pt</Top>
             <Left>0.1875in</Left>
             <Height>11pt</Height>
-            <Width>25.12326cm</Width>
+            <Width>18.94821cm</Width>
             <ZIndex>2</ZIndex>
             <Visibility>
               <Hidden>=IIF(Fields!BankAccFilter.Value = "",True,False)</Hidden>
@@ -2364,7 +2367,7 @@
           <FontSize>8pt</FontSize>
         </Style>
       </Body>
-      <Width>27.02682cm</Width>
+      <Width>19.65376cm</Width>
       <Page>
         <PageHeader>
           <Height>2.18757cm</Height>
@@ -2391,10 +2394,10 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>10pt</Top>
-              <Left>16.57175cm</Left>
+              <Top>20pt</Top>
+              <Left>12.47953cm</Left>
               <Height>11pt</Height>
-              <Width>10.18129cm</Width>
+              <Width>6.94493cm</Width>
               <Style>
                 <FontFamily>Segoe UI</FontFamily>
                 <FontSize>8pt</FontSize>
@@ -2422,10 +2425,10 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0pt</Top>
+              <Top>10pt</Top>
               <Left>0.1875in</Left>
               <Height>20pt</Height>
-              <Width>16.0955cm</Width>
+              <Width>12.00328cm</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <FontFamily>Segoe UI</FontFamily>
@@ -2453,10 +2456,10 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>30pt</Top>
+              <Top>40pt</Top>
               <Left>0.1875in</Left>
               <Height>11pt</Height>
-              <Width>16.0955cm</Width>
+              <Width>12.00328cm</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <FontFamily>Segoe UI</FontFamily>
@@ -2484,10 +2487,10 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>20pt</Top>
+              <Top>30pt</Top>
               <Left>0.1875in</Left>
               <Height>11pt</Height>
-              <Width>16.0955cm</Width>
+              <Width>12.00328cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <FontFamily>Segoe UI</FontFamily>
@@ -2515,10 +2518,10 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>20pt</Top>
-              <Left>16.57175cm</Left>
+              <Top>30pt</Top>
+              <Left>12.47953cm</Left>
               <Height>11pt</Height>
-              <Width>10.18129cm</Width>
+              <Width>6.94493cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <FontFamily>Segoe UI</FontFamily>
@@ -2547,10 +2550,10 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0pt</Top>
-              <Left>16.57175cm</Left>
+              <Top>10pt</Top>
+              <Left>12.47953cm</Left>
               <Height>11pt</Height>
-              <Width>10.18129cm</Width>
+              <Width>6.94493cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border />
@@ -2627,9 +2630,9 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.43548cm</Top>
-              <Left>17.45473cm</Left>
+              <Left>12.47953cm</Left>
               <Height>11pt</Height>
-              <Width>0.94024in</Width>
+              <Width>1.28787in</Width>
               <ZIndex>1</ZIndex>
               <Visibility>
                 <Hidden>=ReportItems!FlagSum1.Value</Hidden>
@@ -2652,14 +2655,14 @@
             <FontSize>8pt</FontSize>
           </Style>
         </PageFooter>
-        <PageHeight>21cm</PageHeight>
-        <PageWidth>29.7cm</PageWidth>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
         <InteractiveHeight>11in</InteractiveHeight>
         <InteractiveWidth>8.5in</InteractiveWidth>
-        <LeftMargin>1.05834cm</LeftMargin>
-        <RightMargin>1.05834cm</RightMargin>
-        <TopMargin>1.05834cm</TopMargin>
-        <BottomMargin>1.48166cm</BottomMargin>
+        <LeftMargin>0.5cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style>
           <FontFamily>Segoe UI</FontFamily>

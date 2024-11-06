@@ -36,6 +36,10 @@ report 50102 "Payment Receipt"
             column(Cash_Sale_Cust__Name; "Customer Name")
             {
             }
+            column(CustomerTIN;CustomerTIN)
+            {
+                
+            }
             column(Cash_Sale_Cust__Telephone_No_; "Cash Sale Cust. Telephone No.")
             {
             }
@@ -567,6 +571,12 @@ report 50102 "Payment Receipt"
                 Customer.SetRange("No.", GenJournalLine."Account No.");
                 if Customer.FindSet() then begin
                     "Customer Name" := Customer.Name;
+                    CustomerTIN := Customer.TIN;
+                end;
+
+                if "Currency Code" = '' then begin
+                    GenLedgerSetup.Get();
+                    "Currency Code" := GenLedgerSetup."LCY Code";
                 end;
             end;
 
@@ -619,4 +629,6 @@ report 50102 "Payment Receipt"
         NoText: array[1] of Text;
         WriteAmountInWords: Codeunit "ASL.WriteAmountInWords";
         "Customer Name": Text;
+        CustomerTIN: Text;
+        GenLedgerSetup: Record "General Ledger Setup";
 }
