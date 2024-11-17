@@ -1,5 +1,6 @@
 codeunit 50100 "Finance Management"
 {
+    Permissions=tabledata "Bank Account"=RIMD;
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgmt: Codeunit "No. Series";
@@ -239,30 +240,5 @@ codeunit 50100 "Finance Management"
                 DownloadFromStream(InStream, 'Printing Customer Receipt', '', '', FileName);
             until GenJnlLineFilter.Next() = 0;
         end;
-    end;
-
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Check Line", 'OnBeforeCheckDocType', '', false, false)]
-    local procedure OnBeforeCheckDocType(GenJournalLine: Record "Gen. Journal Line"; var IsHandled: Boolean)
-    begin
-        // allow Document Type "Gen. Journal Document Type"::"ASL.PRL.SalaryAdvance" for emploee journal lines
-        if (GenJournalLine."Account Type" = GenJournalLine."Account Type"::Employee) and
-            (GenJournalLine."Document Type" = "Gen. Journal Document Type"::"ASL.PRL.SalaryAdvance")
-        then
-            IsHandled := true;
-        // allow Document Type "Gen. Journal Document Type"::"ASL.PRL.ActivityAdvance" for emploee journal lines
-        if (GenJournalLine."Account Type" = GenJournalLine."Account Type"::Employee) and
-            (GenJournalLine."Document Type" = "Gen. Journal Document Type"::"ASL.PRL.ActivityAdvance")
-        then
-            IsHandled := true;
-        // allow Document Type "Gen. Journal Document Type"::"ASL.PRL.GratuityAdvance" for emploee journal lines
-        if (GenJournalLine."Account Type" = GenJournalLine."Account Type"::Employee) and
-            (GenJournalLine."Document Type" = "Gen. Journal Document Type"::"ASL.PRL.GratuityAdvance")
-        then
-            IsHandled := true;
-        // allow Document Type "Gen. Journal Document Type"::"ASL.PRL.AdvancePayment" for emploee journal lines
-        if (GenJournalLine."Account Type" = GenJournalLine."Account Type"::Employee) and
-            (GenJournalLine."Document Type" = "Gen. Journal Document Type"::"ASL.PRL.AdvancePayment")
-        then
-            IsHandled := true;
     end;
 }

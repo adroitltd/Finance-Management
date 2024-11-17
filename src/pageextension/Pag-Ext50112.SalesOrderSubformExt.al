@@ -42,5 +42,9 @@ pageextension 50112 "Sales Order Subform Ext" extends "Sales Order Subform"
         {
             Visible=true;
         }
+        modify("VAT Prod. Posting Group")
+        {
+            Visible=true;
+        }
     }
 }
