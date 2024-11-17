@@ -27,7 +27,7 @@ tableextension 50106 "ASL.GenJournalLineExt" extends "Gen. Journal Line"
             Caption = 'Narration';
             DataClassification = ToBeClassified;
         }
-        field(50104; "Customer Name"; Text[1028])
+        field(50105; "Customer Name"; Text[1028])
         {
             Caption = 'Customer Name';
             DataClassification = ToBeClassified;

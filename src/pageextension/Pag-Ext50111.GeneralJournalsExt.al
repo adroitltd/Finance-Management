@@ -62,6 +62,5 @@ pageextension 50111 "General Journals Ext" extends "General Journal"
 
     actions
     {
-       
     }
 }
