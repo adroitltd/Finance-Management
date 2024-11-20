@@ -1,4 +1,4 @@
-namespace financeMgtPermissionSet;
+namespace financeMgtPermissionSets;
 
 using FinanceManagement.FinanceManagement;
 
