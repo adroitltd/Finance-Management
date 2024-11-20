@@ -5,6 +5,7 @@ using Microsoft.Sales.Customer;
 using Microsoft.Sales.Receivables;
 using Microsoft.Utilities;
 using System.Utilities;
+using Microsoft.Finance.GeneralLedger.Journal;
 
 report 50106 "Tenant Trial Balance"
 {

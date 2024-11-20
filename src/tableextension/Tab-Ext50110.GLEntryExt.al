@@ -12,5 +12,11 @@ tableextension 50110 "GL Entry Ext" extends "G/L Entry"
             DataClassification = ToBeClassified;
             Editable = false;
         }
+        field(50106; "Employee Code"; Code[50])
+        {
+            Caption = 'Employee Code';
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
     }
 }
