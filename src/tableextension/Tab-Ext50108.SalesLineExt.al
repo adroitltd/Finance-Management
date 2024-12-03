@@ -2,6 +2,7 @@ namespace FinanceManagement.FinanceManagement;
 
 using Microsoft.Sales.Document;
 using Microsoft.Inventory.Item;
+using Microsoft.Finance.GeneralLedger.Account;
 
 tableextension 50108 "Sales Line Ext" extends "Sales Line"
 {

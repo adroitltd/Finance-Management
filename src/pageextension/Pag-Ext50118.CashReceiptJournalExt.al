@@ -11,6 +11,15 @@ pageextension 50118 "Cash Receipt Journal Ext" extends "Cash Receipt Journal"
         {
             Visible=true;
         }
+        addafter(Description)
+        {
+            field("Customer Name";Rec."Customer Name")
+            {
+                Caption='Other Customer Name';
+                ApplicationArea=Basic, Suite;
+                Editable=true;
+            }
+        }
     }
     actions
     {

@@ -13,6 +13,11 @@ pageextension 50113 "Sales Order Ext" extends "Sales Order"
         }
         addafter("Sell-to Customer Name")
         {
+            field("Other Customer Name";Rec."Other Customer Name")
+            {
+                ApplicationArea=Basic, Suite;
+                Editable=true;
+            }
             field("TIN No.";Rec."TIN No.")
             {
                 ApplicationArea=Basic, Suite;

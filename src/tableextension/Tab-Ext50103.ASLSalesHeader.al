@@ -73,5 +73,11 @@ tableextension 50103 "ASL.SalesHeader" extends "Sales Header"
             DataClassification = ToBeClassified;
             Editable = false;
         }
+        field(50109; "Other Customer Name"; Text[200])
+        {
+            Caption = 'Other Customer Name';
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
     }
 }

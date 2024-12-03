@@ -44,5 +44,17 @@ tableextension 50104 "ASL.SalesInvoiceHeader" extends "Sales Invoice Header"
             Caption = 'Narration';
             DataClassification = ToBeClassified;
         }
+        field(50107; "TIN No."; Text[255])
+        {
+            Caption = 'TIN No.';
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(50109; "Other Customer Name"; Text[200])
+        {
+            Caption = 'Other Customer Name';
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
     }
 }

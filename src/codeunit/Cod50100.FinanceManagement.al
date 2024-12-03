@@ -1,6 +1,7 @@
 codeunit 50100 "Finance Management"
 {
-    Permissions=tabledata "Bank Account"=RIMD;
+    Permissions = tabledata "Bank Account" = RIMD;
+
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgmt: Codeunit "No. Series";
@@ -11,9 +12,9 @@ codeunit 50100 "Finance Management"
     begin
         if ReportId = Report::Order then
             NewReportId := Report::"LPO Report";
-        if ReportId=Report::"Standard Purchase - Order" then
-            NewReportId:=Report::"LPO Report";
-        if ReportId=Report::"Standard Sales - Invoice" then
+        if ReportId = Report::"Standard Purchase - Order" then
+            NewReportId := Report::"LPO Report";
+        if ReportId = Report::"Standard Sales - Invoice" then
             NewReportId := Report::"Tax Invoice Report";
         if ReportId = Report::"Bank Acc. - Detail Trial Bal." then
             NewReportId := Report::"Bank Acc Trial Bal.";
@@ -52,7 +53,7 @@ codeunit 50100 "Finance Management"
     local procedure OnAfterPostSalesDoc(var SalesHeader: Record "Sales Header"; var GenJnlPostLine: Codeunit "Gen. Jnl.-Post Line"; SalesShptHdrNo: Code[20]; RetRcpHdrNo: Code[20]; SalesInvHdrNo: Code[20]; SalesCrMemoHdrNo: Code[20]; CommitIsSuppressed: Boolean; InvtPickPutaway: Boolean; var CustLedgerEntry: Record "Cust. Ledger Entry"; WhseShip: Boolean; WhseReceiv: Boolean)
     var
         SalesInvHeader: Record "Sales Invoice Header";
-    begin 
+    begin
         SalesInvHeader.Get(SalesInvHdrNo);
         // Prevent this when a normal sales order is posted
         if SalesInvHeader."ASL.CashPaymentAccountNo" = '' then exit;
@@ -168,7 +169,7 @@ codeunit 50100 "Finance Management"
         GenJournalLine.Validate("Cash Sale Cust. Name", CustomerName);
         GenJournalLine.Validate("Cash Sale Cust. Telephone No.", CustomerTelephoneNo);
         GenJournalLine.Validate(Narration, CashSaleNarration);
-        if DebitAmount > 0 then 
+        if DebitAmount > 0 then
             GenJournalLine.Validate("Debit Amount", DebitAmount)
         else
             if CreditAmount > 0 then GenJournalLine.Validate("Credit Amount", CreditAmount);
@@ -239,6 +240,21 @@ codeunit 50100 "Finance Management"
                 FileName := 'CustomerReceipt.pdf';
                 DownloadFromStream(InStream, 'Printing Customer Receipt', '', '', FileName);
             until GenJnlLineFilter.Next() = 0;
+        end;
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Post", 'OnBeforePostInvoice', '', false, false)]
+    local procedure OnBeforePostInvoice(var SalesHeader: Record "Sales Header"; var CustLedgerEntry: Record "Cust. Ledger Entry"; CommitIsSuppressed: Boolean; PreviewMode: Boolean; var GenJnlPostLine: Codeunit "Gen. Jnl.-Post Line"; var IsHandled: Boolean; GenJnlLineDocNo: Code[20]; GenJnlLineExtDocNo: Code[35]; GenJnlLineDocType: Enum "Gen. Journal Document Type"; SrcCode: Code[10])
+    var
+        SalesLine: Record "Sales Line";
+    begin
+        SalesLine.Reset();
+        SalesLine.SetRange("Document Type", SalesHeader."Document Type"::Order);
+        SalesLine.SetRange("Document No.", SalesHeader."No.");
+        SalesLine.SetFilter(Type, '%1', SalesLine.Type::"G/L Account");
+        if SalesLine.FindSet() then begin
+            SalesHeader."Posting Description" += SalesLine.Description;
+            SalesHeader.Modify(true);
         end;
     end;
 }

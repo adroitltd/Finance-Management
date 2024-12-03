@@ -702,6 +702,9 @@ report 50101 "Tax Invoice Report"
                         JobNoLbl := '';
 
                     FormatLineValues(Line);
+
+                    if "Description 2" = '' then
+                        "Description 2" := Description
                 end;
 
                 trigger OnPreDataItem()
@@ -1169,6 +1172,8 @@ report 50101 "Tax Invoice Report"
                 TotalPaymentDiscOnVAT := 0;
                 if ("Order No." = '') and "Prepayment Invoice" then
                     "Order No." := "Prepayment Order No.";
+                if "Other Customer Name" <> '' then
+                    "Bill-to Name" := "Other Customer Name";    
             end;
 
             trigger OnPreDataItem()

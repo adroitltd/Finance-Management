@@ -570,7 +570,10 @@ report 50102 "Payment Receipt"
                 Customer.Reset();
                 Customer.SetRange("No.", GenJournalLine."Account No.");
                 if Customer.FindSet() then begin
-                    "Customer Name" := Customer.Name;
+                    if "Customer Name" <> '' then
+                        "Customer Name" := "Customer Name"
+                    else    
+                        "Customer Name" := Customer.Name;
                     CustomerTIN := Customer.TIN;
                 end;
 
